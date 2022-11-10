@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="683c4391-0f67-44fc-98e3-ca1f57e565a2" name="Changes" comment="casi finalizado Enfrentamiento.java" />
-    <list id="0fc5231b-b6a5-4a84-b047-23608c16ae88" name="Changes by clancy" comment="Changes by clancy">
+    <list default="true" id="683c4391-0f67-44fc-98e3-ca1f57e565a2" name="Changes" comment="final">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/juego/Acciones.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/juego/Acciones.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/juego/servidor/Enfrentamiento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/juego/servidor/Enfrentamiento.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/juego/cliente/ClienteJuego.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/juego/cliente/ClienteJuego.java" afterDir="false" />
+    </list>
+    <list id="0fc5231b-b6a5-4a84-b047-23608c16ae88" name="Changes by clancy" comment="Changes by clancy">
+      <change beforePath="$PROJECT_DIR$/src/juego/cliente/ClienteJuego.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/juego/cliente/ClienteJuego.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +31,20 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/src/juego/cliente/ClienteJuego.java">
+      <ranges>
+        <range start1="37" end1="38" start2="37" end2="38" changelist="683c4391-0f67-44fc-98e3-ca1f57e565a2" />
+        <range start1="45" end1="46" start2="45" end2="46" changelist="683c4391-0f67-44fc-98e3-ca1f57e565a2" />
+        <range start1="87" end1="88" start2="87" end2="88" changelist="683c4391-0f67-44fc-98e3-ca1f57e565a2" />
+        <range start1="95" end1="96" start2="95" end2="96" changelist="0fc5231b-b6a5-4a84-b047-23608c16ae88" />
+        <range start1="105" end1="106" start2="105" end2="106" changelist="0fc5231b-b6a5-4a84-b047-23608c16ae88" />
+        <range start1="108" end1="109" start2="108" end2="109" changelist="0fc5231b-b6a5-4a84-b047-23608c16ae88" />
+        <range start1="110" end1="116" start2="110" end2="116" changelist="0fc5231b-b6a5-4a84-b047-23608c16ae88" />
+        <range start1="117" end1="118" start2="117" end2="118" changelist="683c4391-0f67-44fc-98e3-ca1f57e565a2" />
+      </ranges>
+    </file>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -57,7 +74,7 @@
       <recent name="servidor" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Main">
     <configuration default="true" type="AZURE_FUNCTION_SUPPORT" factoryName="Run Functions">
       <option name="appName" />
       <option name="appServicePlanName" />
@@ -89,6 +106,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ClienteJuego" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="juego.cliente.ClienteJuego" />
+      <module name="juegoSockets" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="juego.cliente.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="juego.servidor.Main" />
       <module name="juegoSockets" />
@@ -105,6 +135,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.ClienteJuego" />
       </list>
     </recent_temporary>
   </component>
@@ -190,9 +221,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="root commit" />
     <MESSAGE value="clases iniciales del servidor" />
-    <MESSAGE value="Changes by clancy" />
     <MESSAGE value="comenzamos a iniciar la partida en clase Enfrentamiento" />
     <MESSAGE value="casi finalizado Enfrentamiento.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="casi finalizado Enfrentamiento.java" />
+    <MESSAGE value="Changes by clancy" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changes by clancy" />
   </component>
 </project>

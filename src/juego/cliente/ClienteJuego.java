@@ -35,7 +35,7 @@ public class ClienteJuego {
 			System.out.print("Introduce el nombre");
 			nombre = sc.nextLine();
 			salida.println(nombre);
-			
+
 			boolean continuarTorneo = true;
 			boolean continuarPartida = true;
 
@@ -43,7 +43,7 @@ public class ClienteJuego {
 				while(continuarTorneo){
 					continuarPartida = true;
 					do {
-						String eleccion = menuEleccion(sc);
+						int eleccion = menuEleccion(sc);
 						salida.println(eleccion);
 
 						int resultado = Integer.parseInt(bf.readLine());
@@ -85,7 +85,7 @@ public class ClienteJuego {
 		System.out.println("CLIENTE: Fin del programa");
 	}
 
-	private static String menuEleccion(Scanner sc) {
+	private static int menuEleccion(Scanner sc) {
 		System.out.println("Elija una opción:");
 		System.out.println("1- Piedra");
 		System.out.println("2- Papel");
@@ -115,7 +115,7 @@ public class ClienteJuego {
 		case 3:
 			return "tijera";
 		}
-		return "";
+		return Acciones.ERROR;
 	}
 
 }
