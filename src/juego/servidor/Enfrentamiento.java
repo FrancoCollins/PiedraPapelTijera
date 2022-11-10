@@ -27,7 +27,7 @@ public class Enfrentamiento implements Runnable {
             OutputStream stream = jugador.socket.getOutputStream();
             PrintWriter printWriter = new PrintWriter(stream);
 
-            printWriter.println(Acciones.ENVIAR_SELECCION);
+            printWriter.println(senal);
         } catch (IOException e) {
             e.printStackTrace();
         }
