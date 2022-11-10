@@ -11,6 +11,7 @@ public class Torneo {
     private Jugador ganador;
 
     public Torneo() {
+        jugadores = new ArrayList<>();
         enfrentamientos = new ArrayList<>();
     }
 
