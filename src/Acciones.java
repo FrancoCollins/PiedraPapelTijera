@@ -1,0 +1,9 @@
+public enum Acciones {
+    ENVIAR_SELECCION, // Piedra papel o tijera
+    ENVIAR_SELECCION_RIVAL,
+    ENVIAR_NOMBRE,
+    FINAL_DE_RONDA,
+    FINAL_DE_ENFRENTAMIENTO,
+    FINAL_DE_TORNEO;
+
+}
