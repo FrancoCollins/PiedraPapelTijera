@@ -1,5 +1,7 @@
 package juego.servidor;
 
+import juego.Acciones;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -33,8 +35,7 @@ public class ClientConection extends Thread {
             System.out.println("SERVIDOR: Jugador " + nombreJugador + " se ha unido.");
 
             salida = new PrintStream(clientSocket.getOutputStream());
-            salida.println("Te has conectado.");
-            salida.println("Jugadores en el lobby: " + numJugadores);
+            salida.println(Acciones.CONEXION_EXITOSA);
 
             numJugadores++;
 
