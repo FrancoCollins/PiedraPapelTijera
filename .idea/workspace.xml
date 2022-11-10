@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="683c4391-0f67-44fc-98e3-ca1f57e565a2" name="Changes" comment="comenzamos a iniciar la partida en clase Enfrentamiento">
-      <change beforePath="$PROJECT_DIR$/src/juego/Acciones.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/juego/Acciones.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/juego/cliente/ClienteJuego.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/juego/servidor/Enfrentamiento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/juego/servidor/Enfrentamiento.java" afterDir="false" />
     </list>
     <list id="0fc5231b-b6a5-4a84-b047-23608c16ae88" name="Changes by clancy" comment="Changes by clancy" />
     <option name="SHOW_DIALOG" value="false" />
@@ -140,7 +141,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668103529524</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="comenzamos a iniciar la partida en clase Enfrentamiento">
+      <created>1668103764778</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1668103764778</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -157,8 +165,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="root commit" />
     <MESSAGE value="clases iniciales del servidor" />
-    <MESSAGE value="comenzamos a iniciar la partida en clase Enfrentamiento" />
     <MESSAGE value="Changes by clancy" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changes by clancy" />
+    <MESSAGE value="comenzamos a iniciar la partida en clase Enfrentamiento" />
+    <option name="LAST_COMMIT_MESSAGE" value="comenzamos a iniciar la partida en clase Enfrentamiento" />
   </component>
 </project>
