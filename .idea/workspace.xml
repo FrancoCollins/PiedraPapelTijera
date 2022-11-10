@@ -1,21 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="683c4391-0f67-44fc-98e3-ca1f57e565a2" name="Changes" comment="declarado array jugadores, ahora el servidor acepta jugadores">
-      <change afterPath="$PROJECT_DIR$/src/juego/servidor/ClientConection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/juego/servidor/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/servidor/Enfrentamiento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/juego/servidor/Enfrentamiento.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/servidor/Jugador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/juego/servidor/Jugador.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/servidor/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/servidor/ServidorJuego.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/servidor/Torneo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/juego/servidor/Torneo.java" afterDir="false" />
+    <list default="true" id="683c4391-0f67-44fc-98e3-ca1f57e565a2" name="Changes" comment="comenzamos a iniciar la partida en clase Enfrentamiento">
+      <change beforePath="$PROJECT_DIR$/src/juego/Acciones.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/juego/Acciones.java" afterDir="false" />
     </list>
-    <list id="0fc5231b-b6a5-4a84-b047-23608c16ae88" name="Changes by clancy" comment="">
-      <change afterPath="$PROJECT_DIR$/src/juego/Acciones.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Acciones.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/servidor/Enfrentamiento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/juego/servidor/Enfrentamiento.java" afterDir="false" />
-    </list>
+    <list id="0fc5231b-b6a5-4a84-b047-23608c16ae88" name="Changes by clancy" comment="Changes by clancy" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -30,25 +19,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/src/juego/servidor/Enfrentamiento.java">
-      <ranges>
-        <range start1="0" end1="1" start2="0" end2="3" changelist="683c4391-0f67-44fc-98e3-ca1f57e565a2" />
-        <range start1="3" end1="3" start2="5" end2="7" changelist="0fc5231b-b6a5-4a84-b047-23608c16ae88" />
-        <range start1="4" end1="4" start2="8" end2="9" changelist="0fc5231b-b6a5-4a84-b047-23608c16ae88" />
-        <range start1="5" end1="6" start2="10" end2="11" changelist="683c4391-0f67-44fc-98e3-ca1f57e565a2" />
-        <range start1="13" end1="14" start2="18" end2="18" changelist="0fc5231b-b6a5-4a84-b047-23608c16ae88" />
-        <range start1="15" end1="16" start2="19" end2="20" changelist="683c4391-0f67-44fc-98e3-ca1f57e565a2" />
-        <range start1="18" end1="19" start2="22" end2="22" changelist="0fc5231b-b6a5-4a84-b047-23608c16ae88" />
-        <range start1="21" end1="23" start2="24" end2="50" changelist="683c4391-0f67-44fc-98e3-ca1f57e565a2" />
-        <range start1="24" end1="24" start2="51" end2="74" changelist="0fc5231b-b6a5-4a84-b047-23608c16ae88" />
-        <range start1="26" end1="36" start2="76" end2="80" changelist="683c4391-0f67-44fc-98e3-ca1f57e565a2" />
-        <range start1="37" end1="37" start2="81" end2="83" changelist="683c4391-0f67-44fc-98e3-ca1f57e565a2" />
-        <range start1="38" end1="39" start2="84" end2="89" changelist="683c4391-0f67-44fc-98e3-ca1f57e565a2" />
-        <range start1="40" end1="41" start2="90" end2="95" changelist="683c4391-0f67-44fc-98e3-ca1f57e565a2" />
-      </ranges>
-    </file>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -156,7 +126,21 @@
       <option name="project" value="LOCAL" />
       <updated>1668091449708</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="comenzamos a iniciar la partida en clase Enfrentamiento">
+      <created>1668103519223</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1668103519223</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Changes by clancy">
+      <created>1668103529524</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1668103529524</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -173,6 +157,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="root commit" />
     <MESSAGE value="clases iniciales del servidor" />
-    <option name="LAST_COMMIT_MESSAGE" value="clases iniciales del servidor" />
+    <MESSAGE value="comenzamos a iniciar la partida en clase Enfrentamiento" />
+    <MESSAGE value="Changes by clancy" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changes by clancy" />
   </component>
 </project>
