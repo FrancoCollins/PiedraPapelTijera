@@ -55,6 +55,7 @@ public class Enfrentamiento implements Runnable {
         senal2 = recibirAccionJugador(p2);
     }
 
+
     public boolean esError(int senal1, int senal2) {
         return senal1 == Acciones.ERROR || senal2 == Acciones.ERROR;
     }
