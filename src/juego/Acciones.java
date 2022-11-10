@@ -17,8 +17,15 @@ public class Acciones {
     public static int TIJERA                    = 102;
 
     public static int GANADOR_DE_RONDA          = 200;
-    public static int GANADOR_DE_TORNEO         = 201;
-    public static int GANADOR_DE_ENFRENTAMIENTO = 202;
+    public static int GANADOR_DE_ENFRENTAMIENTO = 201;
+    public static int GANADOR_DE_TORNEO         = 202;
+
+    public static final int PERDEDOR_DE_RONDA           = 203;
+    public static final int PERDEDOR_DE_ENFRENTAMIENTO  = 204;
+    public static final int PERDEDOR_DE_TORNO  = 205;
+
+    public static final int EMPATE                      = 207;
+
 
     public static int ERROR                     = -1;
     public static int SELECCION_INCORRECTA      = -2;
