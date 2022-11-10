@@ -10,7 +10,7 @@ import java.net.Socket;
 
 public class ServidorJuego implements Runnable {
 
-    public static final int PUERTO = 2017;
+    public static int PUERTO = 1043;
 
     public Torneo torneo;
 
@@ -24,6 +24,7 @@ public class ServidorJuego implements Runnable {
         PrintStream salida = null;
         Socket socketAlCliente = null;
         InetSocketAddress direccion = new InetSocketAddress(PUERTO);
+        PUERTO++;
 
         try (ServerSocket serverSocket = new ServerSocket()){
 

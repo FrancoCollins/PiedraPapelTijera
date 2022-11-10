@@ -10,19 +10,22 @@ public class Torneo {
     private ArrayList<Jugador> jugadores;
     private Jugador ganador;
 
-    public Torneo(){
-
+    public Torneo() {
+        enfrentamientos = new ArrayList<>();
     }
 
-    public synchronized void agregarJugador(Jugador jugador){
+    public synchronized void agregarJugador(Jugador jugador) {
         this.jugadores.add(jugador);
 
-        if(jugadores.size() == MAX_PLAYERS)
-            new Thread(comenzar()).start();
+        if (jugadores.size() == MAX_PLAYERS)
+            for (int i = 0; i < enfrentamientos.size(); i++) {
+                enfrentamientos.add(new Enfrentamiento(jugadores.get(i), jugadores.get(i + 1)));
+            }
+        new Thread(comenzar()).start();
 
     }
 
-    public Runnable comenzar(){
+    public Runnable comenzar() {
         return () -> {
             for (var enf : enfrentamientos)
                 new Thread(enf).start();
