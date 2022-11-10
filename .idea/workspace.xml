@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="683c4391-0f67-44fc-98e3-ca1f57e565a2" name="Changes" comment="comenzamos a iniciar la partida en clase Enfrentamiento">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/juego/cliente/ClienteJuego.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/juego/cliente/ClienteJuego.java" afterDir="false" />
+    <list default="true" id="683c4391-0f67-44fc-98e3-ca1f57e565a2" name="Changes" comment="casi finalizado Enfrentamiento.java" />
+    <list id="0fc5231b-b6a5-4a84-b047-23608c16ae88" name="Changes by clancy" comment="Changes by clancy">
+      <change beforePath="$PROJECT_DIR$/src/juego/Acciones.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/juego/Acciones.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/juego/servidor/Enfrentamiento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/juego/servidor/Enfrentamiento.java" afterDir="false" />
     </list>
-    <list id="0fc5231b-b6a5-4a84-b047-23608c16ae88" name="Changes by clancy" comment="Changes by clancy" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -22,6 +22,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="f67a131ad4fdd2e15e33e747ecfd4587550d9f13" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -33,14 +38,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "C:/Users/hugog/IdeaProjects/PiedraPapelTijera2/src/juego/cliente"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/hugog/IdeaProjects/PiedraPapelTijera2/src/juego/cliente&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="servidor" />
@@ -154,7 +159,21 @@
       <option name="project" value="LOCAL" />
       <updated>1668103764778</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="casi finalizado Enfrentamiento.java">
+      <created>1668106830476</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1668106830476</updated>
+    </task>
+    <task id="LOCAL-00008" summary="casi finalizado Enfrentamiento.java">
+      <created>1668106986923</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1668106986923</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -173,6 +192,7 @@
     <MESSAGE value="clases iniciales del servidor" />
     <MESSAGE value="Changes by clancy" />
     <MESSAGE value="comenzamos a iniciar la partida en clase Enfrentamiento" />
-    <option name="LAST_COMMIT_MESSAGE" value="comenzamos a iniciar la partida en clase Enfrentamiento" />
+    <MESSAGE value="casi finalizado Enfrentamiento.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="casi finalizado Enfrentamiento.java" />
   </component>
 </project>
