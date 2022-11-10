@@ -69,8 +69,10 @@ public class Enfrentamiento implements Runnable {
         return false;
     }
 
-    public Jugador ganadorRonda() {
-        return null;
+    public Jugador ganadorRonda(int senal1, int senal2) {
+        if (senal1 == Acciones.PAPEL && senal2 == Acciones.TIJERA) {
+            return p2;
+        }
     }
 
     @Override
