@@ -93,7 +93,7 @@ public class ClienteJuego {
 		System.out.print("Elige: ");
 		String eleccion = sc.nextLine();
 		int n = 0;
-		
+
 		try {
 			while(!eleccion.matches("[0-9]") || Integer.parseInt(eleccion) > 3) {
 				System.out.print("Debes introducir un numero: ");
@@ -103,17 +103,17 @@ public class ClienteJuego {
 				}
 			}
 		} catch (Exception e) {
-			
+
 		}
 		n = Integer.parseInt(eleccion);
-		
+
 		switch (n) {
-		case 1:
-			return "piedra";
-		case 2:
-			return "papel";
-		case 3:
-			return "tijera";
+			case 1:
+				return Acciones.PIEDRA;
+			case 2:
+				return Acciones.PAPEL;
+			case 3:
+				return Acciones.TIJERA;
 		}
 		return Acciones.ERROR;
 	}
