@@ -7,7 +7,7 @@ public class Acciones {
     public static final int FINAL_DE_RONDA            = 4;
     public static final int FINAL_DE_ENFRENTAMIENTO   = 5;
     public static final int FINAL_DE_TORNEO           = 6;
-
+    public static final int COMENZAR_TORNEO           = 7;
 
 
 
