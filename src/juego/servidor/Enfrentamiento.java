@@ -3,7 +3,10 @@ package juego.servidor;
 import juego.Acciones;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.Scanner;
 
 public class Enfrentamiento implements Runnable {
 
@@ -13,12 +16,10 @@ public class Enfrentamiento implements Runnable {
     private int puntajeP1;
     private int puntajeP2;
 
-    private Jugador jugadorEnEspera;
 
     public Enfrentamiento(Jugador p1, Jugador p2) {
         this.p1 = p1;
         this.p2 = p2;
-        this.jugadorEnEspera = null;
     }
 
     public void enviarSenalAJugador(Jugador jugador, int senal) {
@@ -47,6 +48,29 @@ public class Enfrentamiento implements Runnable {
         }
 
         return Acciones.ERROR;
+    }
+
+    public void recibirAcciones(Integer senal1, Integer senal2) {
+        senal1 = recibirAccionJugador(p1);
+        senal2 = recibirAccionJugador(p2);
+    }
+
+    public boolean esError(int senal1, int senal2) {
+        return senal1 == Acciones.ERROR || senal2 == Acciones.ERROR;
+    }
+
+    public boolean seleccionEsIncorrecta(int senal1, int senal2) {
+        if (senal1 != Acciones.PIEDRA && senal1 != Acciones.PAPEL && senal1 != Acciones.TIJERA)
+            return true;
+
+        if (senal2 != Acciones.PIEDRA && senal2 != Acciones.PAPEL && senal2 != Acciones.TIJERA)
+            return true;
+
+        return false;
+    }
+
+    public Jugador ganadorRonda() {
+        return null;
     }
 
     @Override
