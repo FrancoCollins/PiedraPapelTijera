@@ -1,4 +1,4 @@
-package servidor;
+package juego.servidor;
 
 import java.net.InetAddress;
 import java.net.Socket;
