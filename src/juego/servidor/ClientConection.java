@@ -35,7 +35,7 @@ public class ClientConection extends Thread {
             System.out.println("SERVIDOR: Jugador " + nombreJugador + " se ha unido.");
 
             salida = new PrintStream(clientSocket.getOutputStream());
-            salida.println(Acciones.CONEXION_EXITOSA);
+            salida.println(Acciones.COMENZAR_TORNEO);
 
             numJugadores++;
 
