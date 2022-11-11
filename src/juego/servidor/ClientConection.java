@@ -1,6 +1,6 @@
 package juego.servidor;
 
-import juego.Acciones;
+import juego.Senal;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -31,7 +31,7 @@ public class ClientConection extends Thread {
             BufferedReader bf = new BufferedReader(entrada);
             salida = new PrintStream(clientSocket.getOutputStream());
 
-            salida.println(Acciones.CONEXION_EXITOSA);
+            salida.println(Senal.CONEXION_EXITOSA);
 
             String nombreJugador = bf.readLine();
 

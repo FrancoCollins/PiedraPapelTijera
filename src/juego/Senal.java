@@ -1,6 +1,6 @@
 package juego;
 
-public class Acciones {
+public class Senal {
     public static final int ENVIAR_SELECCION          = 51; // Piedra papel o tijera
     public static final int ENVIAR_SELECCION_RIVAL    = 52;
     public static final int ENVIAR_NOMBRE             = 53;
@@ -22,9 +22,14 @@ public class Acciones {
 
     public static final int PERDEDOR_DE_RONDA           = 203;
     public static final int PERDEDOR_DE_ENFRENTAMIENTO  = 204;
-    public static final int PERDEDOR_DE_TORNO           = 205;
+    public static final int PERDEDOR_DE_TORNEO          = 205;
 
     public static final int EMPATE                      = 207;
+
+    public static final int PAQUETE_PUNTUACION          = 808;
+
+    public static final int COMENZAR_FINAL            = 209;
+
 
 
     public static final int ERROR                     = -1;

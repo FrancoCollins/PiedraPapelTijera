@@ -43,7 +43,7 @@ public class Torneo {
                     finalistas.add(enf.getGanadorFinal());
                 }
 
-                new Enfrentamiento(finalistas.get(0), finalistas.get(0)).start();
+                new Final(finalistas.get(0), finalistas.get(1)).start();
 
             } catch (InterruptedException e){
                 throw new RuntimeException(e);
