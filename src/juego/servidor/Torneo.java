@@ -175,6 +175,11 @@ public class Torneo {
                 enfrentamientos = new ArrayList<>();
                 finalistas = new ArrayList<>();
 
+                for (Jugador jugador : jugadores){
+                    enviarSenalAJugador(jugador, Senal.JUGADORES_EN_LOBBY);
+                    enviarPaqueteAJugador(jugador, jugadores.size() + "/" + MAX_PLAYERS);
+                }
+
                 if (jugadores.size() == MAX_PLAYERS) {
                     for (int i = 0; i <= MAX_PLAYERS / 2; i += 2)
                         enfrentamientos.add(new Enfrentamiento(jugadores.get(i), jugadores.get(i + 1), this));
