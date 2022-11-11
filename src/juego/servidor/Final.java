@@ -11,7 +11,7 @@ public class Final extends Enfrentamiento {
     @Override
     public void run() {
         System.out.println("Comienza la final!");
-        torneo.enviarSenalAJugadores(p1, p2, Senal.COMENZAR_FINAL);
+        torneo.enviarSenalAJugadores(p1, p2, Senal.COMENZAR_PARTIDA_FINAL);
         while (getPuntajeP1() < 3 && getPuntajeP2() < 3) {
             torneo.enviarSenalAJugadores(p1, p2, Senal.ENVIAR_SELECCION);
 

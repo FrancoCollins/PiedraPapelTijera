@@ -5,14 +5,20 @@ public class Senal {
     public static final int SI = 1;
     public static final int NO = 0;
 
+    public static final int CONECTARSE = 299328;
+    public static final int JUGADORES_EN_LOBBY        = 923;
+
 
     public static final int ENVIAR_SELECCION          = 51; // Piedra papel o tijera
     public static final int ENVIAR_SELECCION_RIVAL    = 52;
     public static final int ENVIAR_NOMBRE             = 53;
+
+    public static final int COMENZAR_ENFRENTAMIENTO   = 991;
+    public static final int COMENZAR_TORNEO           = 992;
+
     public static final int FINAL_DE_RONDA            = 54;
     public static final int FINAL_DE_ENFRENTAMIENTO   = 55;
     public static final int FINAL_DE_TORNEO           = 56;
-    public static final int COMENZAR_TORNEO           = 57;
     public static final int CONEXION_EXITOSA          = 58;
 
 
@@ -37,7 +43,7 @@ public class Senal {
 
     public static final int PAQUETE_PUNTUACION          = 808;
 
-    public static final int COMENZAR_FINAL            = 209;
+    public static final int COMENZAR_PARTIDA_FINAL = 209;
 
     public static final int PREGUNTA_REVANCHA         = 666;
 

@@ -37,7 +37,7 @@ public class ClienteJuego {
 
 			manager.start();
 		} catch (UnknownHostException e) {
-			System.err.println("CLIENTE: No encuentro el servidor en la direcci�n" + IP_SERVER);
+			System.err.println("CLIENTE: No encuentro el servidor en la dirección" + IP_SERVER);
 			e.printStackTrace();
 		} catch (IOException e) {
 			System.err.println("CLIENTE: Error de entrada/salida");

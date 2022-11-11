@@ -80,14 +80,21 @@ public class Torneo {
 
     public synchronized void agregarJugador(Jugador jugador) {
         this.jugadores.add(jugador);
+        enviarJugadoresEnLobby();
 
         if (jugadores.size() == MAX_PLAYERS) {
             System.out.println("Comienza el torneo!");
+
+            for (Jugador j : jugadores){
+                enviarSenalAJugador(j, Senal.COMENZAR_TORNEO);
+            }
+
             for (int i = 0; i <= MAX_PLAYERS / 2; i += 2) {
                 enfrentamientos.add(new Enfrentamiento(jugadores.get(i), jugadores.get(i + 1), this));
             }
             new Thread(comenzar()).start();
         }
+
 
     }
 
@@ -120,10 +127,10 @@ public class Torneo {
             }
             int senal = revancha.getSenal();
 
-            if (senal == Senal.NO){
-                try{
+            if (senal == Senal.NO) {
+                try {
                     jugador.socket.close();
-                } catch (IOException e){
+                } catch (IOException e) {
 
                 }
                 jugadores.remove(jugador);
@@ -131,6 +138,13 @@ public class Torneo {
 
             System.out.println("El jugador " + jugador.nombreDeUsuario + " dijo: " + senal);
         };
+    }
+
+    public void enviarJugadoresEnLobby(){
+        for (Jugador p : jugadores){
+            enviarSenalAJugador(p, Senal.JUGADORES_EN_LOBBY);
+            enviarPaqueteAJugador(p, jugadores.size() + "/" + MAX_PLAYERS);
+        }
     }
 
     public Runnable comenzar() {

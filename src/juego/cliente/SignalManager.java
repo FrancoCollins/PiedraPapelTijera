@@ -1,11 +1,8 @@
 package juego.cliente;
 
-import jdk.jfr.Label;
 import juego.Senal;
 
 import java.io.*;
-import java.lang.annotation.Target;
-import java.lang.reflect.AccessibleObject;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -21,11 +18,17 @@ public class SignalManager extends Thread {
         this.reader = reader;
         this.writer = writer;
         this.game = game;
+
+        mandarSenalDeConexion();
+    }
+
+    public void mandarSenalDeConexion(){
+        System.out.println("Conectando al servidor...");
+        writer.println(Senal.CONECTARSE);
     }
 
     public void manejarConexionExitosa(){
         System.out.println("Te has conectado!");
-        System.out.println("Esperando al resto de jugadores...");
     }
 
     public void manejarRondaGanada(){
@@ -68,11 +71,11 @@ public class SignalManager extends Thread {
     }
 
     public void manejarEnviarNombre(){
-        System.out.println("BIENVENIDO AL JUEGO PIEDRA-PAPEL-TIJERA");
         System.out.print("Introduce tu nombre de usuario: ");
         Scanner sc = new Scanner(System.in);
         String nombre = sc.nextLine();
         writer.println(nombre);
+        System.out.println("Esperando al resto de jugadores...");
     }
 
     public void manejarFinalDeTorneo(){
@@ -80,7 +83,7 @@ public class SignalManager extends Thread {
         game.actualizarContinuarTorneo(false);
     }
 
-    public void manejarComenzarFinal(){
+    public void manejarComenzarPartidaFinal(){
         System.out.println("Has llegado a la final!");
     }
 
@@ -121,6 +124,19 @@ public class SignalManager extends Thread {
 
     public void manejarError(){
         System.out.println("Hubo un error.");
+    }
+
+    public void manejarJugadoresEnLobby(){
+        String jugadores = reader.nextLine();
+        System.out.println("Jugadores en lobby: " + jugadores);
+    }
+
+    public void manejarComenzarEnfrentamiento(){
+        System.out.println("Comienza el enfrentamiento!");
+    }
+
+    public void manejarComenzarTorneo(){
+        System.out.println("Comienza el torneo!");
     }
 
     // Envía paquete
@@ -181,11 +197,14 @@ public class SignalManager extends Thread {
                     case Senal.PERDEDOR_DE_ENFRENTAMIENTO:  manejarEnfrentamientoPerdido(); break;
                     case Senal.GANADOR_DE_TORNEO:           manejarTorneoGanado();          break;
                     case Senal.PAQUETE_PUNTUACION:          manejarObtenerPuntaje();        break;
-                    case Senal.COMENZAR_FINAL:              manejarComenzarFinal();         break;
+                    case Senal.COMENZAR_PARTIDA_FINAL:      manejarComenzarPartidaFinal();  break;
                     case Senal.FINAL_DE_TORNEO:             manejarFinalDeTorneo();         break;
                     case Senal.NOMBRE_GANADOR_DEL_ENFRENTAMIENTO: manejarNombreGanadorEnf(); break;
                     case Senal.NOMBRE_GANADOR_DEL_TORNEO: manejarNombreGanadorTor(); break;
                     case Senal.PREGUNTA_REVANCHA:           manejarPreguntaRevancha();      break;
+                    case Senal.JUGADORES_EN_LOBBY:          manejarJugadoresEnLobby();      break;
+                    case Senal.COMENZAR_TORNEO:             manejarComenzarTorneo();        break;
+                    case Senal.COMENZAR_ENFRENTAMIENTO:     manejarComenzarEnfrentamiento(); break;
                     case Senal.ERROR:                       manejarError();                 break;
                 }
 

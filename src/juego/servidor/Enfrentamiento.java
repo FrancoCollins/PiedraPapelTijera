@@ -52,6 +52,7 @@ public class Enfrentamiento extends Thread {
     @Override
     public void run() {
         System.out.println("Comienza la partida!");
+        torneo.enviarSenalAJugadores(p1, p2, Senal.COMENZAR_ENFRENTAMIENTO);
         while (puntajeP1 < 3 && puntajeP2 < 3) {
             torneo.enviarSenalAJugadores(p1, p2, Senal.ENVIAR_SELECCION);
 
