@@ -206,6 +206,7 @@ public class SignalManager extends Thread {
                     case Senal.COMENZAR_TORNEO:             manejarComenzarTorneo();        break;
                     case Senal.COMENZAR_ENFRENTAMIENTO:     manejarComenzarEnfrentamiento(); break;
                     case Senal.ERROR:                       manejarError();                 break;
+                    case Senal.LOBBY_LLENO:                 manejarLobbyLleno();            break;
                 }
 
             } catch (NoSuchElementException e){
@@ -214,5 +215,9 @@ public class SignalManager extends Thread {
             }
 
         }while (true);
+    }
+
+    private void manejarLobbyLleno() {
+        System.out.println("El lobby se encuentra lleno en este momento, espere unos minutos para volver a ingresar");
     }
 }

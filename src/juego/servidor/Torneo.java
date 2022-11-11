@@ -79,13 +79,22 @@ public class Torneo {
     }
 
     public synchronized void agregarJugador(Jugador jugador) {
+        if (jugadores.size() == MAX_PLAYERS) {
+            enviarSenalAJugador(jugador, Senal.LOBBY_LLENO);
+            try{
+                jugador.socket.close();
+            }catch (IOException e){
+                System.out.println(e.getMessage());
+            }
+            return;
+        }
         this.jugadores.add(jugador);
         enviarJugadoresEnLobby();
 
         if (jugadores.size() == MAX_PLAYERS) {
             System.out.println("Comienza el torneo!");
 
-            for (Jugador j : jugadores){
+            for (Jugador j : jugadores) {
                 enviarSenalAJugador(j, Senal.COMENZAR_TORNEO);
             }
 
@@ -138,8 +147,8 @@ public class Torneo {
         };
     }
 
-    public void enviarJugadoresEnLobby(){
-        for (Jugador p : jugadores){
+    public void enviarJugadoresEnLobby() {
+        for (Jugador p : jugadores) {
             enviarSenalAJugador(p, Senal.JUGADORES_EN_LOBBY);
             enviarPaqueteAJugador(p, jugadores.size() + "/" + MAX_PLAYERS);
         }
@@ -173,7 +182,7 @@ public class Torneo {
                 enfrentamientos = new ArrayList<>();
                 finalistas = new ArrayList<>();
 
-                for (Jugador jugador : jugadores){
+                for (Jugador jugador : jugadores) {
                     enviarSenalAJugador(jugador, Senal.JUGADORES_EN_LOBBY);
                     enviarPaqueteAJugador(jugador, jugadores.size() + "/" + MAX_PLAYERS);
                 }
