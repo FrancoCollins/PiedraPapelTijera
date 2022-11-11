@@ -3,9 +3,6 @@ package juego.servidor;
 import juego.Senal;
 
 import java.io.*;
-import java.net.InetSocketAddress;
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -73,7 +70,7 @@ public class Torneo {
         senal1 = recibirAccionJugador(p1);
         senal2 = recibirAccionJugador(p2);
 
-        return new int[] {senal1, senal2};
+        return new int[]{senal1, senal2};
     }
 
     public boolean esError(int senal1, int senal2) {
@@ -101,7 +98,7 @@ public class Torneo {
      * @param jugador
      * @return
      */
-    public Runnable preguntarRevancha(Jugador jugador){
+    public Runnable preguntarRevancha(Jugador jugador) {
         return () -> {
             enviarSenalAJugador(jugador, Senal.PREGUNTA_REVANCHA);
 
@@ -114,11 +111,11 @@ public class Torneo {
             revancha.start();
             espera.start();
 
-            try{
+            try {
                 revancha.join();
                 espera.join();
-            } catch (InterruptedException e){
-
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
             int senal = revancha.getSenal();
 
@@ -134,8 +131,8 @@ public class Torneo {
             for (var enf : enfrentamientos)
                 enf.start();
 
-            try{
-                for (var enf : enfrentamientos){
+            try {
+                for (var enf : enfrentamientos) {
                     enf.join();
                     finalistas.add(enf.getGanadorFinal());
                 }
@@ -146,30 +143,26 @@ public class Torneo {
                 finale.join();
                 ganador = finale.getGanadorFinal();
 
-                for (Jugador jugador : jugadores){
+                for (Jugador jugador : jugadores) {
                     enviarSenalAJugador(jugador, Senal.NOMBRE_GANADOR_DEL_TORNEO);
                     enviarPaqueteAJugador(jugador, ganador.nombreDeUsuario);
                     new Thread(preguntarRevancha(jugador)).start();
                 }
 
                 // Esperar a que todos hayan contestado
-                Thread.sleep(10_000);
+                Thread.sleep(20_000);
                 enfrentamientos = new ArrayList<>();
                 finalistas = new ArrayList<>();
 
-                for (int i = 0; i <= MAX_PLAYERS/2; i += 2) {
-                    if(i != jugadores.size())
+                for (int i = 0; i <= MAX_PLAYERS / 2; i += 2) {
+                    if (i != jugadores.size())
                         enfrentamientos.add(new Enfrentamiento(jugadores.get(i), jugadores.get(i + 1), this));
                 }
-                if(jugadores.size() == MAX_PLAYERS)
+                if (jugadores.size() == MAX_PLAYERS)
                     new Thread(comenzar()).start();
 
 
-
-
-
-
-            } catch (InterruptedException e){
+            } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
         };
@@ -179,11 +172,13 @@ public class Torneo {
 
         private HiloRevancha revancha;
 
-        public void setRevancha(HiloRevancha revancha){ this.revancha = revancha;}
+        public void setRevancha(HiloRevancha revancha) {
+            this.revancha = revancha;
+        }
 
         @Override
-        public void run(){
-            try{
+        public void run() {
+            try {
                 Thread.sleep(10_000);
                 revancha.interrupt();
             } catch (InterruptedException e) {
@@ -196,7 +191,7 @@ public class Torneo {
         private Jugador jugador;
         private int senal;
 
-        public HiloRevancha(Jugador jugador){
+        public HiloRevancha(Jugador jugador) {
             this.jugador = jugador;
             this.senal = Senal.NO;
         }
@@ -206,25 +201,27 @@ public class Torneo {
         }
 
         @Override
-        public void run(){
-            try{
+        public void run() {
+            try {
                 InputStream stream = jugador.socket.getInputStream();
                 Scanner sc = new Scanner(stream);
-                do{
+                do {
                     try {
                         senal = Integer.parseInt(sc.nextLine());
-                    }catch (NumberFormatException e){
+                    } catch (NumberFormatException e) {
                         senal = Senal.SELECCION_INCORRECTA;
                         enviarSenalAJugador(jugador, senal);
                     }
-                }while(senal != Senal.NO && senal != Senal.SI);
+                } while (senal != Senal.NO && senal != Senal.SI);
 
                 espera.interrupt();
-            } catch (IOException e){
+            } catch (IOException e) {
 
             }
         }
 
-        public int getSenal(){ return senal;}
+        public int getSenal() {
+            return senal;
+        }
     }
 }
