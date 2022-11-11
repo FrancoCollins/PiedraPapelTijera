@@ -25,7 +25,7 @@ public class ClienteJuego {
 		InetSocketAddress direccionServidor = new InetSocketAddress(IP_SERVER, PUERTO);
 
 		GameFunctionality game = new GameFunctionality();
-		try { 
+		try {
 			Socket socketAlServidor = new Socket();
 			socketAlServidor.connect(direccionServidor);
 
