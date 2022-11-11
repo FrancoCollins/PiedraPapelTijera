@@ -4,6 +4,7 @@ import juego.Senal;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Torneo {
@@ -160,19 +161,21 @@ public class Torneo {
                 enfrentamientos = new ArrayList<>();
                 finalistas = new ArrayList<>();
 
-                for (int i = 0; i <= MAX_PLAYERS / 2; i += 2) {
-                    if (i != jugadores.size())
+                if (jugadores.size() == MAX_PLAYERS) {
+                    for (int i = 0; i <= MAX_PLAYERS / 2; i += 2)
                         enfrentamientos.add(new Enfrentamiento(jugadores.get(i), jugadores.get(i + 1), this));
-                }
-                if (jugadores.size() == MAX_PLAYERS)
+
                     new Thread(comenzar()).start();
-
-
+                }
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-        };
+        }
+
+                ;
     }
+
+    ;
 
     class HiloDeEspera extends Thread {
 
@@ -222,7 +225,9 @@ public class Torneo {
 
                 espera.interrupt();
             } catch (IOException e) {
-
+                e.printStackTrace();
+            } catch (NoSuchElementException e) {
+                System.out.println(jugador.nombreDeUsuario + " se ha desconectado");
             }
         }
 
