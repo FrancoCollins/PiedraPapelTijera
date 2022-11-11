@@ -20,6 +20,10 @@ public class Senal {
     public static final int GANADOR_DE_ENFRENTAMIENTO = 201;
     public static final int GANADOR_DE_TORNEO         = 202;
 
+    public static final int NOMBRE_GANADOR_DEL_ENFRENTAMIENTO = 493;
+
+    public static final int NOMBRE_GANADOR_DEL_TORNEO = 494;
+
     public static final int PERDEDOR_DE_RONDA           = 203;
     public static final int PERDEDOR_DE_ENFRENTAMIENTO  = 204;
     public static final int PERDEDOR_DE_TORNEO          = 205;

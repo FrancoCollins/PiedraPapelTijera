@@ -63,28 +63,6 @@ public class SignalManager extends Thread {
 
         System.out.println("Tu puntaje: " + puntajes[0]);
         System.out.println("Puntaje del rival: " + puntajes[1]);
-
-
-        // vamos a separar esto después
-        if (puntajes[0] == 3){
-            if(Integer.parseInt(reader.nextLine()) != Senal.GANADOR_DE_ENFRENTAMIENTO){
-                System.out.println("Error.");
-                return;
-            }
-            System.out.println("¡Has ganado el enfrentamiento!");
-            String ganador = reader.nextLine();
-            System.out.println(ganador + ", eres el mejor!");
-        }
-
-        else if (puntajes[1] == 3){
-            if(Integer.parseInt(reader.nextLine()) != Senal.PERDEDOR_DE_ENFRENTAMIENTO){
-                System.out.println("Error.");
-                return;
-            }
-            System.out.println("Has perdido el enfrentamiento.");
-            String ganador = reader.nextLine();
-            System.out.println("El ganador es: " + ganador + '.');
-        }
     }
 
     public void manejarEnviarNombre(){
@@ -102,6 +80,16 @@ public class SignalManager extends Thread {
 
     public void manejarComenzarFinal(){
         System.out.println("Has llegado a la final!");
+    }
+
+    public void manejarNombreGanadorEnf(){
+        String ganador = reader.nextLine();
+        System.out.println("El ganador del enfrentamiento es: " + ganador);
+    }
+
+    public void manejarNombreGanadorTor(){
+        String ganador = reader.nextLine();
+        System.out.println("El ganador del torneo es: " + ganador);
     }
 
     // Envía paquete
@@ -166,6 +154,9 @@ public class SignalManager extends Thread {
                 case Senal.PAQUETE_PUNTUACION:          manejarObtenerPuntaje();        break;
                 case Senal.COMENZAR_FINAL:              manejarComenzarFinal();         break;
                 case Senal.FINAL_DE_TORNEO:             manejarFinalDeTorneo();         break;
+                case Senal.NOMBRE_GANADOR_DEL_ENFRENTAMIENTO: manejarNombreGanadorEnf(); break;
+                case Senal.NOMBRE_GANADOR_DEL_TORNEO: manejarNombreGanadorTor(); break;
+
             }
         }while (true);
     }

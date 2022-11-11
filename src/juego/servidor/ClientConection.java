@@ -2,17 +2,14 @@ package juego.servidor;
 
 import juego.Senal;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
+import java.io.*;
 import java.net.Socket;
 
 public class ClientConection extends Thread {
 
     public static int numJugadores = 0;
 
-    public Torneo torneo;
+    private Torneo torneo;
     private Socket clientSocket;
 
     public ClientConection(Socket clientSocket, Torneo torneo) {
@@ -20,6 +17,7 @@ public class ClientConection extends Thread {
         this.clientSocket = clientSocket;
 
     }
+
 
     @Override
     public void run() {
@@ -41,7 +39,7 @@ public class ClientConection extends Thread {
             numJugadores++;
 
             Jugador jugador = new Jugador(clientSocket, nombreJugador, torneo);
-            torneo.agregarJugador(jugador);
+            torneo.agregarJugador(jugador, this);
         } catch (IOException e) {
             System.err.println("SERVIDOR: Error de entrada/salida");
             e.printStackTrace();
