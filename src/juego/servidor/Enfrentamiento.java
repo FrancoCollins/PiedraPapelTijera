@@ -94,11 +94,7 @@ public class Enfrentamiento extends Thread {
                 }
             }
 
-            System.out.println("" + puntajeP1 + "" + Senal.SEPARADOR + "" + puntajeP2);
-
-            torneo.enviarSenalAJugadores(p1, p2, Senal.PAQUETE_PUNTUACION);
-            torneo.enviarPaqueteAJugador(p1, "" + puntajeP1 + "" + Senal.SEPARADOR + "" + puntajeP2);
-            torneo.enviarPaqueteAJugador(p2, "" + puntajeP2 + "" + Senal.SEPARADOR + "" + puntajeP1);
+            enviarPuntajes();
 
         }
 
@@ -117,6 +113,14 @@ public class Enfrentamiento extends Thread {
         torneo.enviarSenalAJugadores(p1, p2, Senal.NOMBRE_GANADOR_DEL_ENFRENTAMIENTO);
         torneo.enviarPaqueteAJugadores(p1, p2, ganadorFinal.nombreDeUsuario);
 
+    }
+
+    public void enviarPuntajes() {
+        System.out.println("" + puntajeP1 + "" + Senal.SEPARADOR + "" + puntajeP2);
+
+        torneo.enviarSenalAJugadores(p1, p2, Senal.PAQUETE_PUNTUACION);
+        torneo.enviarPaqueteAJugador(p1, "" + puntajeP1 + "" + Senal.SEPARADOR + "" + puntajeP2);
+        torneo.enviarPaqueteAJugador(p2, "" + puntajeP2 + "" + Senal.SEPARADOR + "" + puntajeP1);
     }
 
 

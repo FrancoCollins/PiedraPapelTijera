@@ -111,6 +111,21 @@ public class Torneo {
                     enviarPaqueteAJugador(jugador, ganador.nombreDeUsuario);
                 }
 
+                // Esperar a que todos hayan contestado
+                Thread.sleep(10_000);
+                enfrentamientos = new ArrayList<>();
+                finalistas = new ArrayList<>();
+
+                for (int i = 0; i <= MAX_PLAYERS/2; i += 2) {
+                    if(i != jugadores.size())
+                        enfrentamientos.add(new Enfrentamiento(jugadores.get(i), jugadores.get(i + 1), this));
+                }
+                if(jugadores.size() == MAX_PLAYERS)
+                    new Thread(comenzar()).start();
+
+
+
+
 
 
             } catch (InterruptedException e){

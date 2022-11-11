@@ -39,7 +39,7 @@ public class ClientConection extends Thread {
             numJugadores++;
 
             Jugador jugador = new Jugador(clientSocket, nombreJugador, torneo);
-            torneo.agregarJugador(jugador, this);
+            torneo.agregarJugador(jugador);
         } catch (IOException e) {
             System.err.println("SERVIDOR: Error de entrada/salida");
             e.printStackTrace();

@@ -9,7 +9,7 @@ public class Final extends Enfrentamiento {
     }
 
     @Override
-    public void run(){
+    public void run() {
         System.out.println("Comienza la final!");
         torneo.enviarSenalAJugadores(p1, p2, Senal.COMENZAR_FINAL);
         while (getPuntajeP1() < 3 && getPuntajeP2() < 3) {
@@ -39,7 +39,6 @@ public class Final extends Enfrentamiento {
             Jugador ganador = ganadorRonda(senal1, senal2);
 
 
-
             if (ganador == null) {
                 torneo.enviarSenalAJugadores(p1, p2, Senal.EMPATE);
             } else {
@@ -59,7 +58,6 @@ public class Final extends Enfrentamiento {
             torneo.enviarPaqueteAJugador(getP2(), "" + getPuntajeP2() + "" + Senal.SEPARADOR + "" + getPuntajeP1());
 
         }
-
 
 
         if (getPuntajeP1() == 3) {
