@@ -21,6 +21,7 @@ public class ClienteJuego {
 	public static void main(String[] args) {
 		System.out.println("        APLICACIÓN CLIENTE         ");
 		System.out.println("-----------------------------------");
+		System.out.println("BIENVENIDO AL JUEGO PIEDRA-PAPEL-TIJERA");
 
 		InetSocketAddress direccionServidor = new InetSocketAddress(IP_SERVER, PUERTO);
 

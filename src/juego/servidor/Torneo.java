@@ -94,8 +94,6 @@ public class Torneo {
             }
             new Thread(comenzar()).start();
         }
-
-
     }
 
     /**

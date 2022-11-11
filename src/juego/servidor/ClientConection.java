@@ -29,7 +29,6 @@ public class ClientConection extends Thread {
             BufferedReader bf = new BufferedReader(entrada);
             salida = new PrintStream(clientSocket.getOutputStream());
 
-            System.out.println("BIENVENIDO AL JUEGO PIEDRA-PAPEL-TIJERA");
 
             int senalConectarse =  Integer.parseInt(bf.readLine());
             if(senalConectarse == Senal.CONECTARSE)
