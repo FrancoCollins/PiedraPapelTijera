@@ -3,9 +3,10 @@ package juego.servidor;
 import juego.Acciones;
 
 import java.io.*;
+import java.security.KeyPair;
 import java.util.Scanner;
 
-public class Enfrentamiento implements Runnable {
+public class Enfrentamiento extends Thread {
 
     private Jugador p1;
     private Jugador p2;
@@ -22,12 +23,26 @@ public class Enfrentamiento implements Runnable {
         this.ganadorFinal = null;
     }
 
+    public void enviarPaqueteAJugador(Jugador jugador, String paquete) {
+        try {
+            OutputStream stream = jugador.socket.getOutputStream();
+            PrintStream pr = new PrintStream(stream);
+            pr.println(paquete);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void enviarPaqueteAJugadores(String paquete) {
+        enviarPaqueteAJugador(p1, paquete);
+        enviarPaqueteAJugador(p2, paquete);
+    }
+
     public void enviarSenalAJugador(Jugador jugador, int senal) {
         try {
             OutputStream stream = jugador.socket.getOutputStream();
-            PrintWriter printWriter = new PrintWriter(stream);
-
-            printWriter.println(senal);
+            PrintStream pr = new PrintStream(stream);
+            pr.println(senal);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -51,9 +66,11 @@ public class Enfrentamiento implements Runnable {
         return Acciones.ERROR;
     }
 
-    public void recibirAcciones(Integer senal1, Integer senal2) {
+    public int[] recibirAcciones(int senal1, int senal2) {
         senal1 = recibirAccionJugador(p1);
         senal2 = recibirAccionJugador(p2);
+
+        return new int[] {senal1, senal2};
     }
 
     public boolean esError(int senal1, int senal2) {
@@ -92,8 +109,14 @@ public class Enfrentamiento implements Runnable {
         while (puntajeP1 < 3 && puntajeP2 < 3) {
             enviarSenalAJugadores(Acciones.ENVIAR_SELECCION);
 
-            Integer senal1 = Acciones.ERROR, senal2 = Acciones.ERROR;
-            recibirAcciones(senal1, senal2);
+            int senal1 = Acciones.ERROR, senal2 = Acciones.ERROR;
+
+            int[] senales = recibirAcciones(senal1, senal2);
+            senal1 = senales[0];
+            senal2 = senales[1];
+
+            System.out.println("Senal 1: " + senal1);
+            System.out.println("Senal 2: " + senal2);
 
             do {
                 if (senal1 == Acciones.ERROR) {
@@ -109,28 +132,30 @@ public class Enfrentamiento implements Runnable {
 
             Jugador ganador = ganadorRonda(senal1, senal2);
 
-            int senalResultado;
 
 
             if (ganador == null) {
-                senalResultado = Acciones.EMPATE;
+                 enviarSenalAJugadores(Acciones.EMPATE);
             } else {
                 if (ganador == p1) {
                     enviarSenalAJugador(p1, Acciones.GANADOR_DE_RONDA);
                     enviarSenalAJugador(p2, Acciones.PERDEDOR_DE_RONDA);
                     puntajeP1++;
-                    enviarSenalAJugadores(Acciones.FINAL_DE_RONDA);
                 } else {
                     enviarSenalAJugador(p2, Acciones.GANADOR_DE_RONDA);
-                    enviarSenalAJugador(p2, Acciones.PERDEDOR_DE_RONDA);
+                    enviarSenalAJugador(p1, Acciones.PERDEDOR_DE_RONDA);
                     puntajeP2++;
-                    enviarSenalAJugadores(Acciones.FINAL_DE_RONDA);
                 }
             }
+
+            System.out.println("" + puntajeP1 + "" + Acciones.SEPARADOR + "" + puntajeP2);
+
+            enviarPaqueteAJugador(p1, "" + puntajeP1 + "" + Acciones.SEPARADOR + "" + puntajeP2);
+            enviarPaqueteAJugador(p2, "" + puntajeP2 + "" + Acciones.SEPARADOR + "" + puntajeP1);
+
         }
 
-        // Termina el enfrentamiento
-        enviarSenalAJugadores(Acciones.FINAL_DE_ENFRENTAMIENTO);
+
 
         if (puntajeP1 == 3) {
             ganadorFinal = p1;
@@ -141,6 +166,9 @@ public class Enfrentamiento implements Runnable {
             enviarSenalAJugador(p2, Acciones.GANADOR_DE_ENFRENTAMIENTO);
             enviarSenalAJugador(p1, Acciones.PERDEDOR_DE_ENFRENTAMIENTO);
         }
+
+        enviarPaqueteAJugadores(ganadorFinal.nombreDeUsuario);
+
     }
 
     public Jugador getGanadorFinal(){ return ganadorFinal;}

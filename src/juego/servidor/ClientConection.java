@@ -29,13 +29,14 @@ public class ClientConection extends Thread {
         try {
             entrada = new InputStreamReader(clientSocket.getInputStream());
             BufferedReader bf = new BufferedReader(entrada);
+            salida = new PrintStream(clientSocket.getOutputStream());
+
+            salida.println(Acciones.CONEXION_EXITOSA);
 
             String nombreJugador = bf.readLine();
 
             System.out.println("SERVIDOR: Jugador " + nombreJugador + " se ha unido.");
 
-            salida = new PrintStream(clientSocket.getOutputStream());
-            salida.println(Acciones.COMENZAR_TORNEO);
 
             numJugadores++;
 
