@@ -6,6 +6,7 @@ import juego.Senal;
 import java.io.*;
 import java.lang.annotation.Target;
 import java.lang.reflect.AccessibleObject;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class SignalManager extends Thread {
@@ -163,32 +164,36 @@ public class SignalManager extends Thread {
     public void run(){
 
         do{
+            try{
             String resultado_str = reader.nextLine();
             int senal = Senal.ERROR;
 
-            try{
                 senal = Integer.parseInt(resultado_str);
-            } catch (NumberFormatException e){
 
+
+                switch (senal) {
+                    case Senal.CONEXION_EXITOSA:            manejarConexionExitosa();
+                    case Senal.ENVIAR_NOMBRE:               manejarEnviarNombre();          break;
+                    case Senal.ENVIAR_SELECCION:            manejarEnviarSeleccion();       break;
+                    case Senal.GANADOR_DE_RONDA:            manejarRondaGanada();           break;
+                    case Senal.PERDEDOR_DE_RONDA:           manejarRondaPerdida();          break;
+                    case Senal.GANADOR_DE_ENFRENTAMIENTO:   manejarEnfrentamientoGanado();  break;
+                    case Senal.PERDEDOR_DE_ENFRENTAMIENTO:  manejarEnfrentamientoPerdido(); break;
+                    case Senal.GANADOR_DE_TORNEO:           manejarTorneoGanado();          break;
+                    case Senal.PAQUETE_PUNTUACION:          manejarObtenerPuntaje();        break;
+                    case Senal.COMENZAR_FINAL:              manejarComenzarFinal();         break;
+                    case Senal.FINAL_DE_TORNEO:             manejarFinalDeTorneo();         break;
+                    case Senal.NOMBRE_GANADOR_DEL_ENFRENTAMIENTO: manejarNombreGanadorEnf(); break;
+                    case Senal.NOMBRE_GANADOR_DEL_TORNEO: manejarNombreGanadorTor(); break;
+                    case Senal.PREGUNTA_REVANCHA:           manejarPreguntaRevancha();      break;
+                    case Senal.ERROR:                       manejarError();                 break;
+                }
+
+            } catch (NoSuchElementException e){
+                System.out.println("Desconectado del servidor.");
+                break;
             }
 
-            switch (senal) {
-                case Senal.CONEXION_EXITOSA:            manejarConexionExitosa();
-                case Senal.ENVIAR_NOMBRE:               manejarEnviarNombre();          break;
-                case Senal.ENVIAR_SELECCION:            manejarEnviarSeleccion();       break;
-                case Senal.GANADOR_DE_RONDA:            manejarRondaGanada();           break;
-                case Senal.PERDEDOR_DE_RONDA:           manejarRondaPerdida();          break;
-                case Senal.GANADOR_DE_ENFRENTAMIENTO:   manejarEnfrentamientoGanado();  break;
-                case Senal.PERDEDOR_DE_ENFRENTAMIENTO:  manejarEnfrentamientoPerdido(); break;
-                case Senal.GANADOR_DE_TORNEO:           manejarTorneoGanado();          break;
-                case Senal.PAQUETE_PUNTUACION:          manejarObtenerPuntaje();        break;
-                case Senal.COMENZAR_FINAL:              manejarComenzarFinal();         break;
-                case Senal.FINAL_DE_TORNEO:             manejarFinalDeTorneo();         break;
-                case Senal.NOMBRE_GANADOR_DEL_ENFRENTAMIENTO: manejarNombreGanadorEnf(); break;
-                case Senal.NOMBRE_GANADOR_DEL_TORNEO: manejarNombreGanadorTor(); break;
-                case Senal.PREGUNTA_REVANCHA:           manejarPreguntaRevancha();      break;
-                case Senal.ERROR:                       manejarError();                 break;
-            }
         }while (true);
     }
 }

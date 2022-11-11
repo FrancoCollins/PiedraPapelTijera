@@ -119,8 +119,14 @@ public class Torneo {
             }
             int senal = revancha.getSenal();
 
-            if (senal == Senal.NO)
+            if (senal == Senal.NO){
+                try{
+                    jugador.socket.close();
+                } catch (IOException e){
+
+                }
                 jugadores.remove(jugador);
+            }
 
             System.out.println("El jugador " + jugador.nombreDeUsuario + " dijo: " + senal);
         };
