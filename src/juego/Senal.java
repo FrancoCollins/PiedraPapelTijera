@@ -1,6 +1,11 @@
 package juego;
 
 public class Senal {
+
+    public static final int SI = 1;
+    public static final int NO = 0;
+
+
     public static final int ENVIAR_SELECCION          = 51; // Piedra papel o tijera
     public static final int ENVIAR_SELECCION_RIVAL    = 52;
     public static final int ENVIAR_NOMBRE             = 53;
@@ -34,7 +39,7 @@ public class Senal {
 
     public static final int COMENZAR_FINAL            = 209;
 
-
+    public static final int PREGUNTA_REVANCHA         = 666;
 
     public static final int ERROR                     = -1;
     public static final int SELECCION_INCORRECTA      = -2;

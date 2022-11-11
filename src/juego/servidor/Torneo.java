@@ -3,7 +3,11 @@ package juego.servidor;
 import juego.Senal;
 
 import java.io.*;
+import java.net.InetSocketAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Torneo {
 
@@ -76,7 +80,7 @@ public class Torneo {
         return senal1 == Senal.ERROR || senal2 == Senal.ERROR;
     }
 
-    public synchronized void agregarJugador(Jugador jugador, ClientConection conection) {
+    public synchronized void agregarJugador(Jugador jugador) {
         this.jugadores.add(jugador);
 
         if (jugadores.size() == MAX_PLAYERS) {
@@ -87,6 +91,42 @@ public class Torneo {
             new Thread(comenzar()).start();
         }
 
+    }
+
+    /**
+     * Pregunta a los jugadores si quieren jugar otra vez enviando
+     * un paquete y recibiendo la respuesta.
+     * Tiene un timeout de 15 segundos.
+     *
+     * @param jugador
+     * @return
+     */
+    public Runnable preguntarRevancha(Jugador jugador){
+        return () -> {
+            enviarSenalAJugador(jugador, Senal.PREGUNTA_REVANCHA);
+
+            HiloDeEspera espera = new HiloDeEspera();
+            HiloRevancha revancha = new HiloRevancha(jugador);
+
+            espera.setRevancha(revancha);
+            revancha.setEspera(espera);
+
+            revancha.start();
+            espera.start();
+
+            try{
+                revancha.join();
+                espera.join();
+            } catch (InterruptedException e){
+
+            }
+            int senal = revancha.getSenal();
+
+            if (senal == Senal.NO)
+                jugadores.remove(jugador);
+
+            System.out.println("El jugador " + jugador.nombreDeUsuario + " dijo: " + senal);
+        };
     }
 
     public Runnable comenzar() {
@@ -109,6 +149,7 @@ public class Torneo {
                 for (Jugador jugador : jugadores){
                     enviarSenalAJugador(jugador, Senal.NOMBRE_GANADOR_DEL_TORNEO);
                     enviarPaqueteAJugador(jugador, ganador.nombreDeUsuario);
+                    new Thread(preguntarRevancha(jugador)).start();
                 }
 
                 // Esperar a que todos hayan contestado
@@ -134,7 +175,56 @@ public class Torneo {
         };
     }
 
-    public void agregarFinalista(Jugador jugador){
-        this.finalistas.add(jugador);
+    class HiloDeEspera extends Thread {
+
+        private HiloRevancha revancha;
+
+        public void setRevancha(HiloRevancha revancha){ this.revancha = revancha;}
+
+        @Override
+        public void run(){
+            try{
+                Thread.sleep(10_000);
+                revancha.interrupt();
+            } catch (InterruptedException e) {
+            }
+        }
+    }
+
+    class HiloRevancha extends Thread {
+        private HiloDeEspera espera;
+        private Jugador jugador;
+        private int senal;
+
+        public HiloRevancha(Jugador jugador){
+            this.jugador = jugador;
+            this.senal = Senal.NO;
+        }
+
+        public void setEspera(HiloDeEspera espera) {
+            this.espera = espera;
+        }
+
+        @Override
+        public void run(){
+            try{
+                InputStream stream = jugador.socket.getInputStream();
+                Scanner sc = new Scanner(stream);
+                do{
+                    try {
+                        senal = Integer.parseInt(sc.nextLine());
+                    }catch (NumberFormatException e){
+                        senal = Senal.SELECCION_INCORRECTA;
+                        enviarSenalAJugador(jugador, senal);
+                    }
+                }while(senal != Senal.NO && senal != Senal.SI);
+
+                espera.interrupt();
+            } catch (IOException e){
+
+            }
+        }
+
+        public int getSenal(){ return senal;}
     }
 }

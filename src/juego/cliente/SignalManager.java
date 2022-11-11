@@ -5,6 +5,7 @@ import juego.Senal;
 
 import java.io.*;
 import java.lang.annotation.Target;
+import java.lang.reflect.AccessibleObject;
 import java.util.Scanner;
 
 public class SignalManager extends Thread {
@@ -93,6 +94,35 @@ public class SignalManager extends Thread {
     }
 
     // Envía paquete
+    public void manejarPreguntaRevancha(){
+
+        Scanner sc = new Scanner(System.in);
+        int senal = Senal.ERROR;
+        do{
+            System.out.println("El torneo ha terminado. Deseas volver a jugar?");
+            System.out.print("Selección (S/n): ");
+
+            try {
+                String str = sc.nextLine();
+
+                if(str.equalsIgnoreCase("S"))
+                    senal = Senal.SI;
+                else if (str.equalsIgnoreCase("N"))
+                    senal = Senal.NO;
+
+            }catch (NumberFormatException e){
+                System.out.println("Por favor, introduzca una opción válida.");
+            }
+        }while(senal == Senal.ERROR);
+
+        writer.println(senal);
+    }
+
+    public void manejarError(){
+        System.out.println("Hubo un error.");
+    }
+
+    // Envía paquete
     public void manejarEnviarSeleccion(){
         System.out.println("Elija una opción:");
         System.out.println("1- Piedra");
@@ -156,7 +186,8 @@ public class SignalManager extends Thread {
                 case Senal.FINAL_DE_TORNEO:             manejarFinalDeTorneo();         break;
                 case Senal.NOMBRE_GANADOR_DEL_ENFRENTAMIENTO: manejarNombreGanadorEnf(); break;
                 case Senal.NOMBRE_GANADOR_DEL_TORNEO: manejarNombreGanadorTor(); break;
-
+                case Senal.PREGUNTA_REVANCHA:           manejarPreguntaRevancha();      break;
+                case Senal.ERROR:                       manejarError();                 break;
             }
         }while (true);
     }

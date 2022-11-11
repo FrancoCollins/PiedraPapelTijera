@@ -53,9 +53,7 @@ public class Final extends Enfrentamiento {
                 }
             }
 
-
-            torneo.enviarPaqueteAJugador(getP1(), "" + getPuntajeP1() + "" + Senal.SEPARADOR + "" + getPuntajeP2());
-            torneo.enviarPaqueteAJugador(getP2(), "" + getPuntajeP2() + "" + Senal.SEPARADOR + "" + getPuntajeP1());
+            enviarPuntajes();
 
         }
 
