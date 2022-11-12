@@ -17,7 +17,7 @@ public class Main {
             serverSocket.bind(direccion);
             do {
                 socketAlCliente = serverSocket.accept();
-                new Thread(new ClientConection(socketAlCliente, torneo)).start();
+                new Thread(new ClientConnection(socketAlCliente, torneo)).start();
             } while (true);
 
         } catch (IOException e) {

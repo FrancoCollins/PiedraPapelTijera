@@ -18,17 +18,24 @@ public class SignalManager extends Thread {
         this.reader = reader;
         this.writer = writer;
         this.game = game;
-
-        mandarSenalDeConexion();
     }
 
-    public void mandarSenalDeConexion(){
-        System.out.println("Conectando al servidor...");
+    public void enviarSenal(int senal){
+        writer.println(senal);
+    }
+
+    public void enviarPaquete(String paquete){
+        writer.println(paquete);
+    }
+
+    public void enviarSenalDeConexion(){
+        game.getGraphics().onConectando();
         writer.println(Senal.CONECTARSE);
     }
 
     public void manejarConexionExitosa(){
         System.out.println("Te has conectado!");
+        game.getGraphics().onConexionExitosa();
     }
 
     public void manejarRondaGanada(){
@@ -71,11 +78,7 @@ public class SignalManager extends Thread {
     }
 
     public void manejarEnviarNombre(){
-        System.out.print("Introduce tu nombre de usuario: ");
-        Scanner sc = new Scanner(System.in);
-        String nombre = sc.nextLine();
-        writer.println(nombre);
-        System.out.println("Esperando al resto de jugadores...");
+        game.getGraphics().onEnviarNombre();
     }
 
     public void manejarFinalDeTorneo(){
@@ -128,6 +131,7 @@ public class SignalManager extends Thread {
 
     public void manejarJugadoresEnLobby(){
         String jugadores = reader.nextLine();
+        game.getGraphics().onJugadoresEnLobby(jugadores);
         System.out.println("Jugadores en lobby: " + jugadores);
     }
 
@@ -141,39 +145,15 @@ public class SignalManager extends Thread {
 
     // Envía paquete
     public void manejarEnviarSeleccion(){
-        System.out.println("Elija una opción:");
-        System.out.println("1- Piedra");
-        System.out.println("2- Papel");
-        System.out.println("3- Tijera");
-        System.out.print("Elige: ");
+        game.getGraphics().onEnviarSeleccion();
+    }
 
-        Scanner scanner = new Scanner(System.in);
-        String eleccion_str = scanner.nextLine();
-        int eleccion = 0;
+    private void manejarConexionExitosaTorneo() {
+        game.getGraphics().onConexionExitosaTorneo();
+    }
 
-        try {
-            while(!eleccion_str.matches("[0-9]") || Integer.parseInt(eleccion_str) > 3) {
-                System.out.print("Debes introducir un numero: ");
-                eleccion_str = scanner.nextLine();
-                if(Integer.parseInt(eleccion_str) > 3) {
-                    System.out.println("Debes introducir un numero del menu");
-                }
-            }
-        } catch (Exception e) {
-
-        }
-        eleccion = Integer.parseInt(eleccion_str);
-
-        eleccion = switch (eleccion) {
-            case 1 -> Senal.PIEDRA;
-            case 2 -> Senal.PAPEL;
-            case 3 -> Senal.TIJERA;
-            default -> Senal.ERROR;
-        };
-
-        // Envía datos
-        writer.println(eleccion);
-
+    private void manejarLobbyLleno() {
+        System.out.println("El lobby se encuentra lleno en este momento, espere unos minutos para volver a ingresar");
     }
 
     @Override
@@ -205,6 +185,7 @@ public class SignalManager extends Thread {
                     case Senal.JUGADORES_EN_LOBBY:          manejarJugadoresEnLobby();      break;
                     case Senal.COMENZAR_TORNEO:             manejarComenzarTorneo();        break;
                     case Senal.COMENZAR_ENFRENTAMIENTO:     manejarComenzarEnfrentamiento(); break;
+                    case Senal.CONEXION_EXITOSA_TORNEO:     manejarConexionExitosaTorneo(); break;
                     case Senal.ERROR:                       manejarError();                 break;
                     case Senal.LOBBY_LLENO:                 manejarLobbyLleno();            break;
                 }
@@ -217,7 +198,7 @@ public class SignalManager extends Thread {
         }while (true);
     }
 
-    private void manejarLobbyLleno() {
-        System.out.println("El lobby se encuentra lleno en este momento, espere unos minutos para volver a ingresar");
-    }
+
+
+
 }

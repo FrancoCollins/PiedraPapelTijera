@@ -5,14 +5,14 @@ import juego.Senal;
 import java.io.*;
 import java.net.Socket;
 
-public class ClientConection extends Thread {
+public class ClientConnection extends Thread {
 
     public static int numJugadores = 0;
 
     private Torneo torneo;
     private Socket clientSocket;
 
-    public ClientConection(Socket clientSocket, Torneo torneo) {
+    public ClientConnection(Socket clientSocket, Torneo torneo) {
         this.torneo = torneo;
         this.clientSocket = clientSocket;
 

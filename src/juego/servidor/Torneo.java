@@ -89,6 +89,7 @@ public class Torneo {
             return;
         }
         this.jugadores.add(jugador);
+        enviarSenalAJugador(jugador, Senal.CONEXION_EXITOSA_TORNEO);
         enviarJugadoresEnLobby();
 
         if (jugadores.size() == MAX_PLAYERS) {

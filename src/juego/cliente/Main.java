@@ -1,15 +1,15 @@
 package juego.cliente;
 
-import juego.Senal;
 
+import juego.cliente.graphics.Graphics;
 
 import java.io.*;
 import java.net.*;
 import java.util.Scanner;
 
-public class ClienteJuego {
+public class Main {
 	public static final int PUERTO = 1043;
-	public static final String IP_SERVER = "10.34.73.105";
+	public static final String IP_SERVER = "localhost";
 
 	public static String nombre;
 
@@ -22,27 +22,30 @@ public class ClienteJuego {
 		InetSocketAddress direccionServidor = new InetSocketAddress(IP_SERVER, PUERTO);
 
 		GameFunctionality game = new GameFunctionality();
+		Graphics gf = new Graphics(game);
+
 		try {
 			Socket socketAlServidor = new Socket();
 			socketAlServidor.connect(direccionServidor);
 
 			PrintStream salida = new PrintStream(socketAlServidor.getOutputStream());
-			InputStreamReader entrada = new InputStreamReader(socketAlServidor.getInputStream());
-			Scanner sc = new Scanner(entrada);
+			Scanner entrada = new Scanner(new InputStreamReader(socketAlServidor.getInputStream()));
 
-			SignalManager manager = new SignalManager(sc, salida, game);
+			SignalManager manager = new SignalManager(entrada, salida, game);
+
+			game.setGraphics(gf);
+			game.setSignalManager(manager);
 
 			manager.start();
 		} catch (UnknownHostException e) {
 			System.err.println("CLIENTE: No encuentro el servidor en la dirección" + IP_SERVER);
-			e.printStackTrace();
+		} catch (ConnectException e){
+			System.out.println("CLIENTE: Connection timed out.");
 		} catch (IOException e) {
 			System.err.println("CLIENTE: Error de entrada/salida");
-			e.printStackTrace();
 		} catch (Exception e) {
 			System.err.println("CLIENTE: Error -> " + e);
 			e.printStackTrace();
 		}
 	}
-
 }

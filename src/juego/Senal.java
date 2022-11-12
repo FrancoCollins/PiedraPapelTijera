@@ -53,5 +53,6 @@ public class Senal {
     public static final char SEPARADOR                 = '|';
 
     public static final int LOBBY_LLENO =               810;
+    public static final int CONEXION_EXITOSA_TORNEO =   9030;
 }
 
