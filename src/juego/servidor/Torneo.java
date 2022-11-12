@@ -9,19 +9,37 @@ import java.util.Scanner;
 
 public class Torneo {
 
-    public static final int MAX_PLAYERS = 4;
+    private boolean privado;
+    public final int MAX_PLAYERS;
 
     private ArrayList<Enfrentamiento> enfrentamientos;
+
+    public ArrayList<Jugador> getJugadores() {
+        return jugadores;
+    }
+
     private ArrayList<Jugador> jugadores;
 
     private ArrayList<Jugador> finalistas;
 
     private Jugador ganador;
 
+    private String nombreTorneo;
+
     public Torneo() {
         jugadores = new ArrayList<>();
         enfrentamientos = new ArrayList<>();
         finalistas = new ArrayList<>();
+        this.privado = esPrivado;
+    }
+
+    public Torneo(boolean esPrivado, String nombreTorneo, int max_players) {
+        jugadores = new ArrayList<>();
+        enfrentamientos = new ArrayList<>();
+        finalistas = new ArrayList<>();
+        this.privado = esPrivado;
+        this.nombreTorneo = nombreTorneo;
+        MAX_PLAYERS = max_players;
     }
 
     public void enviarPaqueteAJugador(Jugador jugador, String paquete) {
@@ -202,7 +220,6 @@ public class Torneo {
                 ;
     }
 
-    ;
 
     class HiloDeEspera extends Thread {
 
@@ -261,5 +278,24 @@ public class Torneo {
         public int getSenal() {
             return senal;
         }
+    }
+    public boolean isPrivado() {
+        return privado;
+    }
+
+    public String getNombreTorneo() {
+        return nombreTorneo;
+    }
+
+    public void setNombreTorneo(String nombreTorneo) {
+        this.nombreTorneo = nombreTorneo;
+    }
+
+    public int getMAX_PLAYERS() {
+        return MAX_PLAYERS;
+    }
+
+    public void setPrivado(boolean privado) {
+        this.privado = privado;
     }
 }

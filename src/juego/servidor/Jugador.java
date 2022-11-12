@@ -17,5 +17,9 @@ public class Jugador{
         this.nombreDeUsuario = nombreDeUsuario;
         this.torneo = torneo;
     }
+    public Jugador(Socket socket, String nombreDeUsuario){
+        this.socket = socket;
+        this.nombreDeUsuario = nombreDeUsuario;
+    }
 
 }

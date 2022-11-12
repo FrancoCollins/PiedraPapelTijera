@@ -2,6 +2,8 @@ package juego.cliente;
 
 import juego.Senal;
 
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.io.*;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -14,57 +16,57 @@ public class SignalManager extends Thread {
 
     private GameFunctionality game;
 
-    public SignalManager(Scanner reader, PrintStream writer, GameFunctionality game){
+    public SignalManager(Scanner reader, PrintStream writer, GameFunctionality game) {
         this.reader = reader;
         this.writer = writer;
         this.game = game;
     }
 
-    public void enviarSenal(int senal){
+    public void enviarSenal(int senal) {
         writer.println(senal);
     }
 
-    public void enviarPaquete(String paquete){
+    public void enviarPaquete(String paquete) {
         writer.println(paquete);
     }
 
-    public void enviarSenalDeConexion(){
+    public void enviarSenalDeConexion() {
         game.getGraphics().onConectando();
         writer.println(Senal.CONECTARSE);
     }
 
-    public void manejarConexionExitosa(){
+    public void manejarConexionExitosa() {
         System.out.println("Te has conectado!");
         game.getGraphics().onConexionExitosa();
     }
 
-    public void manejarRondaGanada(){
+    public void manejarRondaGanada() {
         System.out.println("¡Has ganado la ronda!");
         game.getGraphics().getPantallaEnfrentamiento().onRondaGanada();
     }
 
-    public void manejarRondaPerdida(){
+    public void manejarRondaPerdida() {
         game.getGraphics().getPantallaEnfrentamiento().onRondaPerdida();
     }
 
-    public void manejarEnfrentamientoGanado(){
+    public void manejarEnfrentamientoGanado() {
         game.getGraphics().getPantallaEnfrentamiento().onEnfrentamientoGanado();
         game.actualizarContinuarPartida(false);
     }
 
-    public void manejarEnfrentamientoPerdido(){
+    public void manejarEnfrentamientoPerdido() {
         game.getGraphics().getPantallaEnfrentamiento().onEnfrentamientoPerdido();
         game.actualizarContinuarPartida(false);
         game.actualizarContinuarTorneo(false);
     }
 
-    public void manejarTorneoGanado(){
+    public void manejarTorneoGanado() {
         System.out.println("¡Has ganado el torneo!");
         game.actualizarContinuarPartida(false);
         game.actualizarContinuarTorneo(false);
     }
 
-    public void manejarObtenerPuntaje(){
+    public void manejarObtenerPuntaje() {
         // Obtener paquete puntaje
 
         String paquete = reader.nextLine();
@@ -77,74 +79,74 @@ public class SignalManager extends Thread {
         game.getGraphics().getPantallaEnfrentamiento().onObtenerPuntaje(puntajes);
     }
 
-    public void manejarEnviarNombre(){
+    public void manejarEnviarNombre() {
         game.getGraphics().onEnviarNombre();
     }
 
-    public void manejarFinalDeTorneo(){
+    public void manejarFinalDeTorneo() {
         System.out.println("Terminó el torneo señores.");
         game.actualizarContinuarTorneo(false);
     }
 
-    public void manejarComenzarPartidaFinal(){
+    public void manejarComenzarPartidaFinal() {
         System.out.println("Has llegado a la final!");
     }
 
-    public void manejarNombreGanadorEnf(){
+    public void manejarNombreGanadorEnf() {
         String ganador = reader.nextLine();
         System.out.println("El ganador del enfrentamiento es: " + ganador);
     }
 
-    public void manejarNombreGanadorTor(){
+    public void manejarNombreGanadorTor() {
         String ganador = reader.nextLine();
         System.out.println("El ganador del torneo es: " + ganador);
     }
 
     // Envía paquete
-    public void manejarPreguntaRevancha(){
+    public void manejarPreguntaRevancha() {
 
         Scanner sc = new Scanner(System.in);
         int senal = Senal.ERROR;
-        do{
+        do {
             System.out.println("El torneo ha terminado. Deseas volver a jugar?");
             System.out.print("Selección (S/n): ");
 
             try {
                 String str = sc.nextLine();
 
-                if(str.equalsIgnoreCase("S"))
+                if (str.equalsIgnoreCase("S"))
                     senal = Senal.SI;
                 else if (str.equalsIgnoreCase("N"))
                     senal = Senal.NO;
 
-            }catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 System.out.println("Por favor, introduzca una opción válida.");
             }
-        }while(senal == Senal.ERROR);
+        } while (senal == Senal.ERROR);
 
         writer.println(senal);
     }
 
-    public void manejarError(){
+    public void manejarError() {
         System.out.println("Hubo un error.");
     }
 
-    public void manejarJugadoresEnLobby(){
+    public void manejarJugadoresEnLobby() {
         String jugadores = reader.nextLine();
         game.getGraphics().onJugadoresEnLobby(jugadores);
         System.out.println("Jugadores en lobby: " + jugadores);
     }
 
-    public void manejarComenzarEnfrentamiento(){
+    public void manejarComenzarEnfrentamiento() {
         System.out.println("Comienza el enfrentamiento!");
     }
 
-    public void manejarComenzarTorneo(){
+    public void manejarComenzarTorneo() {
         System.out.println("Comienza el torneo!");
     }
 
     // Envía paquete
-    public void manejarEnviarSeleccion(){
+    public void manejarEnviarSeleccion() {
         game.getGraphics().onEnviarSeleccion();
     }
 
@@ -156,54 +158,31 @@ public class SignalManager extends Thread {
         System.out.println("El lobby se encuentra lleno en este momento, espere unos minutos para volver a ingresar");
     }
 
-    private void manejarNombreDelRival(){
+    private void manejarNombreDelRival() {
         String nombre = reader.nextLine();
         game.getGraphics().getPantallaEnfrentamiento().onNombreDelRival(nombre);
     }
 
-    @Override
-    public void run(){
 
-        do{
-            try{
-            String resultado_str = reader.nextLine();
-            int senal = Senal.ERROR;
+    private void manejarListaTorneos() {
+        int torneos = Integer.parseInt(reader.nextLine());
+        String[][] torneosPublicos = new String[torneos][4];
+        DefaultTableModel modelo = new DefaultTableModel();
 
-            senal = Integer.parseInt(resultado_str);
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Cantidad de jugadores");
+        modelo.addColumn("Clave");
+        modelo.addColumn("Cantidad maxima de jugadores");
+        for (int i = 0; i < torneos; i++) {
+            String datos = reader.nextLine();
+            String[] datosSplit = datos.split("\\|");
+            modelo.addColumn(datosSplit);
+            System.out.println("Datos recibidos: " + datos);
+        }
+        game.getGraphics().getPantallaUnirseTorneo().onListaTorneo(new JTable(modelo));
 
-
-            switch (senal) {
-                case Senal.CONEXION_EXITOSA:            manejarConexionExitosa();       break;
-                case Senal.ENVIAR_NOMBRE:               manejarEnviarNombre();          break;
-                case Senal.ENVIAR_SELECCION:            manejarEnviarSeleccion();       break;
-                case Senal.GANADOR_DE_RONDA:            manejarRondaGanada();           break;
-                case Senal.PERDEDOR_DE_RONDA:           manejarRondaPerdida();          break;
-                case Senal.EMPATE:                      manejarEmpate();                break;
-                case Senal.GANADOR_DE_ENFRENTAMIENTO:   manejarEnfrentamientoGanado();  break;
-                case Senal.PERDEDOR_DE_ENFRENTAMIENTO:  manejarEnfrentamientoPerdido(); break;
-                case Senal.GANADOR_DE_TORNEO:           manejarTorneoGanado();          break;
-                case Senal.PAQUETE_PUNTUACION:          manejarObtenerPuntaje();        break;
-                case Senal.COMENZAR_PARTIDA_FINAL:      manejarComenzarPartidaFinal();  break;
-                case Senal.FINAL_DE_TORNEO:             manejarFinalDeTorneo();         break;
-                case Senal.NOMBRE_GANADOR_DEL_ENFRENTAMIENTO: manejarNombreGanadorEnf(); break;
-                case Senal.NOMBRE_GANADOR_DEL_TORNEO: manejarNombreGanadorTor();        break;
-                case Senal.PREGUNTA_REVANCHA:           manejarPreguntaRevancha();      break;
-                case Senal.JUGADORES_EN_LOBBY:          manejarJugadoresEnLobby();      break;
-                case Senal.COMENZAR_TORNEO:             manejarComenzarTorneo();        break;
-                case Senal.COMENZAR_ENFRENTAMIENTO:     manejarComenzarEnfrentamiento(); break;
-                case Senal.CONEXION_EXITOSA_TORNEO:     manejarConexionExitosaTorneo(); break;
-                case Senal.NOMBRE_DEL_RIVAL:            manejarNombreDelRival();        break;
-                case Senal.LOBBY_LLENO:                 manejarLobbyLleno();            break;
-                case Senal.ERROR:                       manejarError();                 break;
-            }
-
-            } catch (NoSuchElementException e){
-                System.out.println("Desconectado del servidor.");
-                break;
-            }
-
-        }while (true);
     }
+
 
     private void manejarEmpate() {
         game.getGraphics().getPantallaEnfrentamiento().onEmpate();

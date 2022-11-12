@@ -9,7 +9,9 @@ public class Main {
     public static final int PUERTO = 1043;
 
     public static void main(String[] args) {
-        Torneo torneo = new Torneo();
+        TournamentManager manejadorTorneos = new TournamentManager();
+        SignalManager signalManager = new SignalManager(manejadorTorneos);
+        ClientConnection clientConnection = new ClientConnection(manejadorTorneos, signalManager);
         Socket socketAlCliente = null;
         InetSocketAddress direccion = new InetSocketAddress(PUERTO);
         try {
@@ -17,7 +19,7 @@ public class Main {
             serverSocket.bind(direccion);
             do {
                 socketAlCliente = serverSocket.accept();
-                new Thread(new ClientConnection(socketAlCliente, torneo)).start();
+                clientConnection.conectarCliente(socketAlCliente);
             } while (true);
         } catch (IOException e) {
             System.err.println("SERVIDOR: Error de entrada/salida");

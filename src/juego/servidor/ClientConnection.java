@@ -40,18 +40,21 @@ public class ClientConnection extends Thread {
 
             String nombreJugador = bf.readLine();
 
-            System.out.println("SERVIDOR: Jugador " + nombreJugador + " se ha unido.");
+                System.out.println("SERVIDOR: Jugador " + nombreJugador + " se ha unido.");
 
-            numJugadores++;
+                Jugador jugador = new Jugador(clientSocket, nombreJugador);
 
-            Jugador jugador = new Jugador(clientSocket, nombreJugador, torneo);
-            torneo.agregarJugador(jugador);
-        } catch (IOException e) {
-            System.err.println("SERVIDOR: Error de entrada/salida");
-            e.printStackTrace();
-        } catch (Exception e) {
-            System.err.println("SERVIDOR: Error -> " + e);
-            e.printStackTrace();
-        }
+                signalManager.manage(jugador);
+
+            } catch (IOException e) {
+                System.err.println("SERVIDOR: Error de entrada/salida");
+                e.printStackTrace();
+            } catch (NoSuchElementException e){
+                // Cliente desconectado
+            } catch (Exception e) {
+                System.err.println("SERVIDOR: Error -> " + e);
+                e.printStackTrace();
+            }
+        }).start();
     }
 }
