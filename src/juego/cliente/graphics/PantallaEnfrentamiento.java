@@ -3,7 +3,6 @@ package juego.cliente.graphics;
 import juego.Senal;
 
 import javax.swing.*;
-import javax.xml.stream.Location;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -12,6 +11,12 @@ public class PantallaEnfrentamiento extends JPanel {
 
     private Graphics graphics;
 
+    private JLabel mensaje;
+
+    private JLabel puntaje;
+
+    private JLabel nombreRival;
+
     private JLabel piedra;
 
     private JLabel papel;
@@ -19,7 +24,7 @@ public class PantallaEnfrentamiento extends JPanel {
     private JLabel tijeras;
 
 
-    private boolean senalEnviada = false;
+    private boolean opcionSeleccionada = false;
 
     public PantallaEnfrentamiento(Graphics graphics) {
         this.graphics = graphics;
@@ -27,9 +32,28 @@ public class PantallaEnfrentamiento extends JPanel {
         setLayout(null);
 
 
+        puntaje = new JLabel("0 | 0");
+        puntaje.setSize(100,60);
+        puntaje.setFont(puntaje.getFont().deriveFont(Font.PLAIN, 20));
+        puntaje.setLocation(250,130);
+        this.add(puntaje);
+
+        nombreRival = new JLabel();
+        nombreRival.setSize(500,100);
+        nombreRival.setFont(nombreRival.getFont().deriveFont(Font.PLAIN, 25));
+        nombreRival.setLocation(200,0);
+        this.add(nombreRival);
+
+        mensaje = new JLabel();
+        mensaje.setSize(500,100);
+        mensaje.setFont(mensaje.getFont().deriveFont(Font.PLAIN, 30));
+        mensaje.setLocation(0,50);
+        this.add(mensaje);
+
+
         JPanel panel_piedra = new JPanel();
-        panel_piedra.setBounds(54, 185, 100, 130);
-        add(panel_piedra);
+        panel_piedra.setBounds(54, 250, 100, 130);
+        this.add(panel_piedra);
 
         piedra = new JLabel("");
         panel_piedra.add(piedra);
@@ -41,8 +65,8 @@ public class PantallaEnfrentamiento extends JPanel {
 
 
         JPanel panel_papel = new JPanel();
-        panel_papel.setBounds(200, 185, 100, 130);
-        add(panel_papel);
+        panel_papel.setBounds(200, 250, 100, 130);
+        this.add(panel_papel);
 
         JLabel papel_img = new JLabel("");
         papel_img.setIcon(new ImageIcon(PantallaEnfrentamiento.class.getResource("/juego/cliente/graphics/img/papel.png")));
@@ -55,8 +79,8 @@ public class PantallaEnfrentamiento extends JPanel {
 
 
         JPanel panel_tijeras = new JPanel();
-        panel_tijeras.setBounds(357, 185, 100, 130);
-        add(panel_tijeras);
+        panel_tijeras.setBounds(357, 250, 100, 130);
+        this.add(panel_tijeras);
 
         JLabel tijeras_img = new JLabel("");
         tijeras_img.setIcon(new ImageIcon(PantallaEnfrentamiento.class.getResource("/juego/cliente/graphics/img/tijeras.png")));
@@ -78,11 +102,13 @@ public class PantallaEnfrentamiento extends JPanel {
         return new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if(senalEnviada)
+                if(opcionSeleccionada)
                     return;
 
                 graphics.getFunctionality().getSignalManager().enviarSenal(senal);
-                    senalEnviada = true;
+                mensaje.setText("Selección enviada!");
+
+                opcionSeleccionada = true;
 
                 System.out.println("Clicked " + senal);
             }
@@ -107,5 +133,36 @@ public class PantallaEnfrentamiento extends JPanel {
 
             }
         };
+    }
+
+    public void onNombreDelRival(String nombre){
+        nombreRival.setText("Rival: " + nombre);
+    }
+
+    public void onRondaGanada() {
+        mensaje.setText("¡Has ganado la ronda!");
+        opcionSeleccionada = false;
+    }
+
+    public void onRondaPerdida(){
+        mensaje.setText("Has perdido la ronda :(");
+        opcionSeleccionada = false;
+    }
+
+    public void onEmpate() {
+        mensaje.setText("Empate!!!");
+        opcionSeleccionada = false;
+    }
+
+    public void onEnfrentamientoGanado(){
+        mensaje.setText("¡Has ganado el enfrentamiento!");
+    }
+
+    public void onEnfrentamientoPerdido(){
+        mensaje.setText("Has perdido el enfrentamiento :(");
+    }
+
+    public void onObtenerPuntaje(int[] puntajes) {
+        puntaje.setText(puntajes[0] + " | " + puntajes[1]);
     }
 }

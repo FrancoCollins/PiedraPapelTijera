@@ -19,7 +19,6 @@ public class Main {
                 socketAlCliente = serverSocket.accept();
                 new Thread(new ClientConnection(socketAlCliente, torneo)).start();
             } while (true);
-
         } catch (IOException e) {
             System.err.println("SERVIDOR: Error de entrada/salida");
             e.printStackTrace();
@@ -27,6 +26,5 @@ public class Main {
             System.err.println("SERVIDOR: Error -> " + e);
             e.printStackTrace();
         }
-
     }
 }

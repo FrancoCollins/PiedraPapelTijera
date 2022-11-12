@@ -51,6 +51,10 @@ public class Enfrentamiento extends Thread {
 
     @Override
     public void run() {
+        torneo.enviarSenalAJugadores(p1, p2, Senal.NOMBRE_DEL_RIVAL);
+        torneo.enviarPaqueteAJugador(p1, p2.nombreDeUsuario);
+        torneo.enviarPaqueteAJugador(p2, p1.nombreDeUsuario);
+
         System.out.println("Comienza la partida!");
         torneo.enviarSenalAJugadores(p1, p2, Senal.COMENZAR_ENFRENTAMIENTO);
         while (puntajeP1 < 3 && puntajeP2 < 3) {
@@ -97,6 +101,11 @@ public class Enfrentamiento extends Thread {
 
             enviarPuntajes();
 
+            try {
+                Thread.sleep(3_000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
 
 

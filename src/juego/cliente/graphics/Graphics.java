@@ -10,7 +10,7 @@ public class Graphics extends JFrame {
 
     private PantallaConexion pantallaConexion;
 
-    private PantallaEnfrentamiento pantallaSeleccion;
+    private PantallaEnfrentamiento pantallaEnfrentamiento;
 
     private PantallaLobby pantallaLobby;
 
@@ -20,7 +20,7 @@ public class Graphics extends JFrame {
 
     public Graphics(GameFunctionality functionality){
         this.functionality = functionality;
-        this.pantallaSeleccion = new PantallaEnfrentamiento(this);
+        this.pantallaEnfrentamiento = new PantallaEnfrentamiento(this);
         this.pantallaInicial = new PantallaInicial(this);
         this.pantallaConexion = new PantallaConexion(this);
         this.pantallaLobby = new PantallaLobby(this);
@@ -45,7 +45,7 @@ public class Graphics extends JFrame {
     }
 
     public void onEnviarSeleccion() {
-        this.setContentPane(pantallaSeleccion);
+        this.setContentPane(pantallaEnfrentamiento);
     }
 
 
@@ -59,6 +59,39 @@ public class Graphics extends JFrame {
 
     public void onJugadoresEnLobby(String jugadores) {
         pantallaLobby.onJugadoresEnLobby(jugadores);
+    }
+
+
+    public PantallaInicial getPantallaInicial() {
+        return pantallaInicial;
+    }
+
+    public void setPantallaInicial(PantallaInicial pantallaInicial) {
+        this.pantallaInicial = pantallaInicial;
+    }
+
+    public PantallaConexion getPantallaConexion() {
+        return pantallaConexion;
+    }
+
+    public void setPantallaConexion(PantallaConexion pantallaConexion) {
+        this.pantallaConexion = pantallaConexion;
+    }
+
+    public PantallaEnfrentamiento getPantallaEnfrentamiento() {
+        return pantallaEnfrentamiento;
+    }
+
+    public void setPantallaEnfrentamiento(PantallaEnfrentamiento pantallaEnfrentamiento) {
+        this.pantallaEnfrentamiento = pantallaEnfrentamiento;
+    }
+
+    public PantallaLobby getPantallaLobby() {
+        return pantallaLobby;
+    }
+
+    public void setPantallaLobby(PantallaLobby pantallaLobby) {
+        this.pantallaLobby = pantallaLobby;
     }
 }
 

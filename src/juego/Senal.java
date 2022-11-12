@@ -13,6 +13,8 @@ public class Senal {
     public static final int ENVIAR_SELECCION_RIVAL    = 52;
     public static final int ENVIAR_NOMBRE             = 53;
 
+    public static final int NOMBRE_DEL_RIVAL          = 940;
+
     public static final int COMENZAR_ENFRENTAMIENTO   = 991;
     public static final int COMENZAR_TORNEO           = 992;
 
