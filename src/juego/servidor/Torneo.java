@@ -26,7 +26,8 @@ public class Torneo {
 
     private String nombreTorneo;
 
-    public Torneo() {
+    public Torneo(boolean esPrivado, int max_players) {
+        MAX_PLAYERS = max_players;
         jugadores = new ArrayList<>();
         enfrentamientos = new ArrayList<>();
         finalistas = new ArrayList<>();
@@ -215,9 +216,7 @@ public class Torneo {
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-        }
-
-                ;
+        };
     }
 
 

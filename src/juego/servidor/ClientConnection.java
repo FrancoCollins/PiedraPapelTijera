@@ -4,41 +4,41 @@ import juego.Senal;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
-public class ClientConnection extends Thread {
+public class ClientConnection {
 
-    public static int numJugadores = 0;
+    private TournamentManager tournamentManager;
 
-    private Torneo torneo;
-    private Socket clientSocket;
+    private SignalManager signalManager;
 
-    public ClientConnection(Socket clientSocket, Torneo torneo) {
-        this.torneo = torneo;
-        this.clientSocket = clientSocket;
-
+    public ClientConnection(TournamentManager tournamentManager, SignalManager signalManager){
+        this.tournamentManager = tournamentManager;
+        this.signalManager = signalManager;
     }
 
 
-    @Override
-    public void run() {
-        InputStreamReader entrada = null;
-        PrintStream salida = null;
+    public void conectarCliente(Socket clientSocket) {
+        new Thread( () -> {
+            InputStreamReader entrada = null;
+            PrintStream salida = null;
 
-        try {
-            entrada = new InputStreamReader(clientSocket.getInputStream());
-            BufferedReader bf = new BufferedReader(entrada);
-            salida = new PrintStream(clientSocket.getOutputStream());
+            try {
+                entrada = new InputStreamReader(clientSocket.getInputStream());
+                BufferedReader bf = new BufferedReader(entrada);
+                salida = new PrintStream(clientSocket.getOutputStream());
 
 
-            int senalConectarse =  Integer.parseInt(bf.readLine());
-            if(senalConectarse == Senal.CONECTARSE)
-                salida.println(Senal.CONEXION_EXITOSA);
-            else {
-                clientSocket.close();
-                return;
-            }
+                int senalConectarse = Integer.parseInt(bf.readLine());
+                if (senalConectarse == Senal.CONECTARSE)
+                    salida.println(Senal.CONEXION_EXITOSA);
+                else {
+                    clientSocket.close();
+                    return;
+                }
 
-            String nombreJugador = bf.readLine();
+                String nombreJugador = bf.readLine();
 
                 System.out.println("SERVIDOR: Jugador " + nombreJugador + " se ha unido.");
 

@@ -38,6 +38,7 @@ public class PantallaConexion extends JPanel {
         nombreDeUsuario.setVisible(false);
         enviar.setVisible(false);
     }
+
     public void onConexionExitosa(){
         conexion.setText("Conexion exitosa!");
 

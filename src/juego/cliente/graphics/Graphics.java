@@ -14,7 +14,14 @@ public class Graphics extends JFrame {
 
     private PantallaLobby pantallaLobby;
 
+    private PantallaCreacionTorneo pantallaCreacionTorneo;
+
+    private PantallaUnirseTorneo pantallaUnirseTorneo;
+
     private GameFunctionality functionality;
+
+    private PantallaUnirseTorneo PantallaUnirseTorneo;
+
 
 
 
@@ -24,6 +31,8 @@ public class Graphics extends JFrame {
         this.pantallaInicial = new PantallaInicial(this);
         this.pantallaConexion = new PantallaConexion(this);
         this.pantallaLobby = new PantallaLobby(this);
+        this.pantallaCreacionTorneo = new PantallaCreacionTorneo(this);
+        this.pantallaUnirseTorneo = new PantallaUnirseTorneo(this);
         this.setContentPane(pantallaInicial);
         this.setSize(pantallaInicial.getSize());
         this.setLocationRelativeTo(null);
@@ -93,5 +102,11 @@ public class Graphics extends JFrame {
     public void setPantallaLobby(PantallaLobby pantallaLobby) {
         this.pantallaLobby = pantallaLobby;
     }
+
+    public PantallaCreacionTorneo getPantallaCreacionTorneo() { return this.pantallaCreacionTorneo;}
+
+    public PantallaUnirseTorneo getPantallaUnirseTorneo() {
+
+        return PantallaUnirseTorneo;}
 }
 

@@ -25,7 +25,7 @@ public class PantallaInicial extends JPanel {
         this.add(titulo);
 
         joinServer = new JButton("Unirse a un torneo");
-        joinServer.addActionListener(e -> graphics.getFunctionality().getSignalManager().enviarSenalDeConexion());
+        joinServer.addActionListener(e -> graphics.setContentPane(graphics.getPantallaUnirseTorneo()));
         joinServer.setSize(144,27);
 
         createServer = new JButton("Crear torneo");
