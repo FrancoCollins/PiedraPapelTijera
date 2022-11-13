@@ -1,5 +1,7 @@
 package juego.cliente.graphics;
 
+import juego.Senal;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -25,10 +27,14 @@ public class PantallaInicial extends JPanel {
         this.add(titulo);
 
         joinServer = new JButton("Unirse a un torneo");
-        joinServer.addActionListener(e -> graphics.setContentPane(graphics.getPantallaUnirseTorneo()));
+        joinServer.addActionListener(e -> {
+            graphics.getFunctionality().getSignalManager().enviarSenal(Senal.SOLICITAR_LISTA_TORNEOS);
+            graphics.setContentPane(graphics.getPantallaUnirseTorneo());
+        });
         joinServer.setSize(144,27);
 
         createServer = new JButton("Crear torneo");
+        createServer.addActionListener(e -> graphics.setContentPane(graphics.getPantallaCreacionTorneo()));
         createServer.setSize(108,27);
         createServer.setLocation(63, 228);
         this.add(createServer);

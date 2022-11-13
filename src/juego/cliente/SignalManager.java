@@ -61,6 +61,7 @@ public class SignalManager extends Thread {
 
             } catch (NoSuchElementException e) {
                 System.out.println("Desconectado del servidor.");
+                e.printStackTrace();
                 break;
             }
 
@@ -213,6 +214,7 @@ public class SignalManager extends Thread {
         int torneos = Integer.parseInt(reader.nextLine());
         String[][] torneosPublicos = new String[torneos][4];
         DefaultTableModel modelo = new DefaultTableModel();
+
 
         modelo.addColumn("Nombre");
         modelo.addColumn("Cantidad de jugadores");

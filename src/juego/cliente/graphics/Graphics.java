@@ -20,9 +20,6 @@ public class Graphics extends JFrame {
 
     private GameFunctionality functionality;
 
-    private PantallaUnirseTorneo PantallaUnirseTorneo;
-
-
 
 
     public Graphics(GameFunctionality functionality){
@@ -106,7 +103,7 @@ public class Graphics extends JFrame {
     public PantallaCreacionTorneo getPantallaCreacionTorneo() { return this.pantallaCreacionTorneo;}
 
     public PantallaUnirseTorneo getPantallaUnirseTorneo() {
-
-        return PantallaUnirseTorneo;}
+        return pantallaUnirseTorneo;
+    }
 }
 
