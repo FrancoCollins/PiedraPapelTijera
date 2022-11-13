@@ -4,6 +4,7 @@ import juego.Senal;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.io.*;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -54,6 +55,7 @@ public class SignalManager extends Thread {
                     case Senal.COMENZAR_ENFRENTAMIENTO:             manejarComenzarEnfrentamiento();    break;
                     case Senal.CONEXION_EXITOSA_TORNEO:             manejarConexionExitosaTorneo();     break;
                     case Senal.NOMBRE_DEL_RIVAL:                    manejarNombreDelRival();            break;
+                    case Senal.CLAVE_TORNEO:                        manejarClaveTorneo();               break;
                     case Senal.LISTA_TORNEOS:                       manejarListaTorneos();              break;
                     case Senal.LOBBY_LLENO:                         manejarLobbyLleno();                break;
                     case Senal.ERROR:                               manejarError();                     break;
@@ -66,6 +68,15 @@ public class SignalManager extends Thread {
             }
 
         } while (true);
+    }
+
+    private void manejarUnionExitosaTorneo() {
+        game.getGraphics().onConexionExitosaTorneo();
+    }
+
+    private void manejarClaveTorneo() {
+        String clave = reader.nextLine();
+        game.getGraphics().getFunctionality().setClaveTorneo(clave);
     }
 
     public void enviarSenal(int senal) {
@@ -212,23 +223,21 @@ public class SignalManager extends Thread {
 
     private void manejarListaTorneos() {
         int torneos = Integer.parseInt(reader.nextLine());
-        String[][] torneosPublicos = new String[torneos][4];
-        DefaultTableModel modelo = new DefaultTableModel(torneos, 4);
+        System.out.println("Numero de torneos: " + torneos);
 
+        String[] header = {"Nombre", "Cantidad de jugadores", "Clave"};
+        DefaultTableModel modelo = new DefaultTableModel(header, 0);
 
-        modelo.addColumn("Nombre");
-        modelo.addColumn("Cantidad de jugadores");
-        modelo.addColumn("Clave");
-        modelo.addColumn("Cantidad maxima de jugadores");
-
-
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < torneos; i++) {
             String datos = reader.nextLine();
             String[] datosSplit = datos.split("\\|");
-            modelo.addColumn(datosSplit);
+            modelo.addRow(datosSplit);
             System.out.println("Datos recibidos: " + datos);
         }
-        game.getGraphics().getPantallaUnirseTorneo().onListaTorneo(new JTable(modelo));
+
+        JTable table = new JTable(modelo);
+        table.getColumnModel().getColumn(2).setMaxWidth(0); // Ocultar columna de clave
+        game.getGraphics().getPantallaUnirseTorneo().onListaTorneoRecibida(table);
 
     }
 

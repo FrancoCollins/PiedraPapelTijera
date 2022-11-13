@@ -23,6 +23,7 @@ public class Main {
 
 		GameFunctionality game = new GameFunctionality();
 		Graphics gf = new Graphics(game);
+		game.setGraphics(gf);
 
 		try {
 			Socket socketAlServidor = new Socket();
@@ -32,8 +33,6 @@ public class Main {
 			Scanner entrada = new Scanner(new InputStreamReader(socketAlServidor.getInputStream()));
 
 			SignalManager manager = new SignalManager(entrada, salida, game);
-
-			game.setGraphics(gf);
 			game.setSignalManager(manager);
 
 			manager.start();

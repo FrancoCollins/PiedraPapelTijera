@@ -81,6 +81,8 @@ public class Torneo {
             return Integer.parseInt(sc.readLine());
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (NumberFormatException e){
+            return Senal.DESCONECTADO;
         }
 
         return Senal.ERROR;
@@ -103,7 +105,6 @@ public class Torneo {
             try {
                 jugador.socket.close();
             } catch (IOException e) {
-                System.out.println(e.getMessage());
                 e.printStackTrace();
             }
             return;

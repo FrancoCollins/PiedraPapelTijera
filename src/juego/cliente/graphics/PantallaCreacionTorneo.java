@@ -11,6 +11,8 @@ public class PantallaCreacionTorneo extends JPanel {
 
     private Graphics graphics;
 
+    private boolean senalEnviada = false;
+
     public PantallaCreacionTorneo(Graphics graphics){
         this.graphics = graphics;
 
@@ -44,6 +46,8 @@ public class PantallaCreacionTorneo extends JPanel {
         panel_partida_publica.addMouseListener(listener(Senal.CREAR_TORNEO_PUBLICO));
         panel_partida_publica.addMouseListener(listener(Senal.CREAR_TORNEO_PRIVADO));
 
+
+        this.setSize(500,500);
         this.setVisible(true);
     }
 
@@ -54,7 +58,15 @@ public class PantallaCreacionTorneo extends JPanel {
 
             @Override
             public void mouseClicked(MouseEvent e) {
+                if(senalEnviada)
+                    return;
+
+                graphics.getFunctionality().getSignalManager().enviarSenalDeConexion();
                 graphics.getFunctionality().getSignalManager().enviarSenal(senal);
+                graphics.getFunctionality().getSignalManager().enviarPaquete("Nombre del torneo");
+                graphics.getFunctionality().getSignalManager().enviarPaquete("4");
+                senalEnviada = true;
+                graphics.setContentPane(graphics.getPantallaConexion());
             }
 
             @Override

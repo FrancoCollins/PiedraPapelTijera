@@ -13,17 +13,18 @@ public class TournamentManager {
         torneoHashMap = new HashMap<>();
     }
 
-    public Torneo agregarTorneo(Jugador creador, Torneo torneo) {
-        boolean incorrecto = false;
+    public String agregarTorneo(Jugador creador, Torneo torneo) {
+        boolean incorrecto = true;
+        String clave;
         do {
-            String clave = cadenaAleatoria(10);
+            clave = cadenaAleatoria(10);
             if (torneoHashMap.get(clave) == null) {
                 torneoHashMap.put(clave, torneo);
-                torneo.agregarJugador(creador);
-            } else
-                incorrecto = true;
+                System.out.println("Torneo creado con clave: " + clave);
+                incorrecto = false;
+            }
         } while (incorrecto);
-        return torneo;
+        return clave;
     }
 
     public Torneo obtenerTorneo(String clave) {

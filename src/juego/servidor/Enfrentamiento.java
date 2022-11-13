@@ -33,6 +33,15 @@ public class Enfrentamiento extends Thread {
         return false;
     }
 
+    public boolean jugadorNoSeHaDesconectado(int senal1, int senal2){
+        if (senal1 == Senal.DESCONECTADO)
+            return false;
+        if (senal2 == Senal.DESCONECTADO)
+            return false;
+
+        return true;
+    }
+
     public Jugador ganadorRonda(int senal1, int senal2) {
 
         // empate
@@ -57,7 +66,7 @@ public class Enfrentamiento extends Thread {
 
         System.out.println("Comienza la partida!");
         torneo.enviarSenalAJugadores(p1, p2, Senal.COMENZAR_ENFRENTAMIENTO);
-        while (puntajeP1 < 3 && puntajeP2 < 3) {
+        while (puntajeP1 < 3 && puntajeP2 < 3 && !Thread.currentThread().isInterrupted()) {
             torneo.enviarSenalAJugadores(p1, p2, Senal.ENVIAR_SELECCION);
 
             int senal1 = Senal.ERROR, senal2 = Senal.ERROR;
@@ -79,9 +88,26 @@ public class Enfrentamiento extends Thread {
                     torneo.enviarSenalAJugador(p2, Senal.SELECCION_INCORRECTA);
                     senal2 = torneo.recibirAccionJugador(p2);
                 }
-            } while (seleccionEsIncorrecta(senal1, senal2) || torneo.esError(senal1, senal2));
+            } while (jugadorNoSeHaDesconectado(senal1, senal2) && (seleccionEsIncorrecta(senal1, senal2) || torneo.esError(senal1, senal2)));
 
             Jugador ganador = ganadorRonda(senal1, senal2);
+
+
+            // Si algún jugador se ha desconectado, el ganador será el otro.
+            if(!jugadorNoSeHaDesconectado(senal1, senal2)){
+                if(senal1 == Senal.DESCONECTADO){
+                    ganadorFinal = p2;
+                    torneo.enviarSenalAJugador(p2, Senal.GANADOR_DE_ENFRENTAMIENTO);
+                }
+                else {
+                    ganadorFinal = p1;
+                    torneo.enviarSenalAJugador(p1, Senal.GANADOR_DE_ENFRENTAMIENTO);
+                }
+
+                Thread.currentThread().interrupt();
+                break;
+            }
+
 
 
 

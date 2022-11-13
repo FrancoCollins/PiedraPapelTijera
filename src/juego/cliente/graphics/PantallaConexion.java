@@ -60,12 +60,7 @@ public class PantallaConexion extends JPanel {
             graphics.getFunctionality()
                 .getSignalManager()
                 .enviarPaquete(nombreDeUsuario.getText());
-
             onConectando();
         });
-
-        revalidate();
-        repaint();
-
     }
 }

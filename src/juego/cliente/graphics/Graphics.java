@@ -33,6 +33,7 @@ public class Graphics extends JFrame {
         this.setContentPane(pantallaInicial);
         this.setSize(pantallaInicial.getSize());
         this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
     }
 
@@ -57,6 +58,7 @@ public class Graphics extends JFrame {
 
     public void onEnviarNombre() {
         System.out.println("GRAPHICS dice: Esperando a que el usuario escriba su nombre.");
+        this.setContentPane(pantallaConexion);
     }
 
     public void onConexionExitosaTorneo() {
@@ -105,5 +107,6 @@ public class Graphics extends JFrame {
     public PantallaUnirseTorneo getPantallaUnirseTorneo() {
         return pantallaUnirseTorneo;
     }
+
 }
 

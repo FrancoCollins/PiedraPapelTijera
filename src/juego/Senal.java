@@ -57,6 +57,8 @@ public class Senal {
     public static final int LOBBY_LLENO =               810;
     public static final int CONEXION_EXITOSA_TORNEO =   9030;
 
+    public static final int DESCONECTADO               = 329;
+
 
 
     // Señales que puede enviar el cliente
@@ -75,5 +77,6 @@ public class Senal {
     public static final int UNION_EXITOSA_TORNEO            = 20004;
     public static final int LISTA_TORNEOS                   = 20005;
 
+    public static final int CLAVE_TORNEO                    = 20006;
 }
 

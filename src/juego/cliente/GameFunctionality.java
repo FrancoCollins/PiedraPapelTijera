@@ -16,6 +16,7 @@ public class GameFunctionality {
     private boolean continuarPartida;
     private boolean continuarTorneo;
 
+    private String claveTorneo = null;
 
 
     public void actualizarContinuarPartida(boolean continuar){
@@ -40,5 +41,9 @@ public class GameFunctionality {
 
     public void setSignalManager(SignalManager signalManager) {
         this.signalManager = signalManager;
+    }
+
+    public void setClaveTorneo(String clave) {
+        this.claveTorneo = clave;
     }
 }

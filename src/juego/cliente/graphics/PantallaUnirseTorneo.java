@@ -21,16 +21,16 @@ public class PantallaUnirseTorneo extends JPanel {
 
         titulo = new JLabel("Lista de torneos disponibles");
         titulo.setFont(new Font("TSCu_Comic", Font.BOLD, 34));
-        titulo.setSize(371, 147);
-        titulo.setLocation(57,58);
+        titulo.setSize(500, 27);
+        titulo.setLocation(0,58);
         setLayout(null);
         this.add(titulo);
 
-        tablaTorneos = new JTable();
 
         unirse_torneo = new JButton("Unirse al torneo");
-        unirse_torneo.addActionListener(e -> graphics.getFunctionality().getSignalManager().enviarSenal(Senal.UNIRSE_TORNEO));
         unirse_torneo.setSize(144,27);
+        unirse_torneo.setLocation(150, 420);
+        this.add(unirse_torneo);
 
         entradaCodigoTorneo = new JTextField();
 
@@ -38,10 +38,24 @@ public class PantallaUnirseTorneo extends JPanel {
         this.setVisible(true);
     }
 
-    public void onListaTorneo(JTable tabla){
+    public void onListaTorneoRecibida(JTable tabla){
         this.tablaTorneos = tabla;
-        this.tablaTorneos.setBounds(200, 200, 200, 200);
-        this.add(tabla);
 
+        JScrollPane panel_tabla = new JScrollPane(tabla);
+        panel_tabla.setSize(500,300);
+        panel_tabla.setLocation(0,100);
+        this.add(panel_tabla);
+
+        unirse_torneo.addActionListener(e -> {
+            int columnaConLaClave = 2;
+            String clave = tabla.getValueAt(tabla.getSelectedRow(), columnaConLaClave).toString();
+
+            graphics.getFunctionality().setClaveTorneo(clave);
+            graphics.getFunctionality().getSignalManager().enviarSenal(Senal.UNIRSE_TORNEO);
+            graphics.getFunctionality().getSignalManager().enviarPaquete(clave);
+        });
+
+        revalidate();
+        repaint();
     }
 }

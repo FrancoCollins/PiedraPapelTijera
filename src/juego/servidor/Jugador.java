@@ -22,4 +22,8 @@ public class Jugador{
         this.nombreDeUsuario = nombreDeUsuario;
     }
 
+    public Jugador(Socket socket){
+        this.socket = socket;
+    }
+
 }
