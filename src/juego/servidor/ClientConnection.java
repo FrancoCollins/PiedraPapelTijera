@@ -21,33 +21,26 @@ public class ClientConnection {
 
 
     public void conectarCliente(Socket clientSocket) {
-        Scanner entrada = null;
-        PrintStream salida = null;
-
         try {
-            entrada = new Scanner(new InputStreamReader(clientSocket.getInputStream()));
-            salida = new PrintStream(clientSocket.getOutputStream());
+            Jugador jugador = new Jugador(clientSocket);
 
 
-            int senalConectarse = Integer.parseInt(entrada.nextLine());
+            int senalConectarse = Integer.parseInt(jugador.reader.nextLine());
             if (senalConectarse == Senal.CONECTARSE)
-                salida.println(Senal.CONEXION_EXITOSA);
+                jugador.writter.println(Senal.CONEXION_EXITOSA);
             else {
                 clientSocket.close();
                 return;
             }
 
-            Jugador jugador = new Jugador(clientSocket);
             System.out.println("SERVIDOR: Jugador con IP " + jugador.socket.getInetAddress().getHostName() + " se ha conectado.");
-            signalManager.manage(jugador, entrada, salida);
+            signalManager.manage(jugador);
 
         } catch (IOException e) {
             System.err.println("SERVIDOR: Error de entrada/salida");
             e.printStackTrace();
         } catch (NoSuchElementException e){
             System.out.println("SERVIDOR: Cliente desconectado.");
-            e.printStackTrace();
-            // Cliente desconectado
         } catch (Exception e) {
             System.err.println("SERVIDOR: Error -> " + e);
             e.printStackTrace();

@@ -47,6 +47,9 @@ public class PantallaUnirseTorneo extends JPanel {
         this.add(panel_tabla);
 
         unirse_torneo.addActionListener(e -> {
+            if(tabla.getRowCount() == 0)
+                return;
+
             int columnaConLaClave = 2;
             String clave = tabla.getValueAt(tabla.getSelectedRow(), columnaConLaClave).toString();
 

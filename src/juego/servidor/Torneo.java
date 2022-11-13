@@ -5,7 +5,6 @@ import juego.Senal;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
-import java.util.Scanner;
 
 public class Torneo {
 
@@ -44,13 +43,7 @@ public class Torneo {
     }
 
     public void enviarPaqueteAJugador(Jugador jugador, String paquete) {
-        try {
-            OutputStream stream = jugador.socket.getOutputStream();
-            PrintStream pr = new PrintStream(stream);
-            pr.println(paquete);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        jugador.writter.println(paquete);
     }
 
     public void enviarPaqueteAJugadores(Jugador p1, Jugador p2, String paquete) {
@@ -59,13 +52,7 @@ public class Torneo {
     }
 
     public void enviarSenalAJugador(Jugador jugador, int senal) {
-        try {
-            OutputStream stream = jugador.socket.getOutputStream();
-            PrintStream pr = new PrintStream(stream);
-            pr.println(senal);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        jugador.writter.println(senal);
     }
 
     public void enviarSenalAJugadores(Jugador p1, Jugador p2, int senal) {
@@ -257,26 +244,20 @@ public class Torneo {
 
         @Override
         public void run() {
-            try {
-                InputStream stream = jugador.socket.getInputStream();
-                Scanner sc = new Scanner(stream);
-                do {
-                    try {
-                        senal = Integer.parseInt(sc.nextLine());
-                    } catch (NumberFormatException e) {
-                        senal = Senal.SELECCION_INCORRECTA;
-                        enviarSenalAJugador(jugador, senal);
-                        e.printStackTrace();
-                    }
-                } while (senal != Senal.NO && senal != Senal.SI);
+            do {
+                try {
+                    senal = Integer.parseInt(jugador.reader.nextLine());
+                } catch (NumberFormatException e ) {
+                    senal = Senal.SELECCION_INCORRECTA;
+                    enviarSenalAJugador(jugador, senal);
+                    e.printStackTrace();
+                } catch (NoSuchElementException e){
+                    // Si se desconecta
+                    senal = Senal.NO;
+                }
+            } while (senal != Senal.NO && senal != Senal.SI);
 
-                espera.interrupt();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (NoSuchElementException e) {
-                System.out.println(jugador.nombreDeUsuario + " se ha desconectado");
-                e.printStackTrace();
-            }
+            espera.interrupt();
         }
 
         public int getSenal() {

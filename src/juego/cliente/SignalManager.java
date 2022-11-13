@@ -147,6 +147,7 @@ public class SignalManager extends Thread {
 
     public void manejarComenzarPartidaFinal() {
         System.out.println("Has llegado a la final!");
+        game.getGraphics().getPantallaEnfrentamiento().onEmpezarFinal();
     }
 
     public void manejarNombreGanadorEnf() {

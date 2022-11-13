@@ -7,6 +7,7 @@ import java.io.Writer;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class SignalManager {
@@ -29,33 +30,38 @@ public class SignalManager {
      *
      * @param jugador jugador a manejar
      */
-    public void manage(Jugador jugador, Scanner reader, PrintStream writer) {
+    public void manage(Jugador jugador) {
         new Thread(() -> {
             boolean continuar = false;
             do {
-                String resultado_str = reader.nextLine();
-                int senal = Senal.ERROR;
+                try{
+                    String resultado_str = jugador.reader.nextLine();
+                    int senal = Senal.ERROR;
 
-                senal = Integer.parseInt(resultado_str);
-                System.out.println("Senal recibida en el servidor: " +senal);
+                    senal = Integer.parseInt(resultado_str);
+                    System.out.println("Senal de " + jugador.nombreDeUsuario + " recibida en el servidor: " +senal);
 
 
-                continuar = switch (senal) {
-                    case Senal.CREAR_TORNEO_PUBLICO               -> manejarCrearTorneo(jugador, reader, writer, false);
-                    case Senal.CREAR_TORNEO_PRIVADO               -> manejarCrearTorneo(jugador, reader, writer, true);
-                    case Senal.UNIRSE_TORNEO,
-                            Senal.INGRESAR_CODIGO_PARTIDA_PRIVADA -> manejarUnirseTorneo(jugador, reader, writer);
-                    case Senal.SOLICITAR_LISTA_TORNEOS            -> manejarListaTorneos(writer);
-                    default -> false;
+                    continuar = switch (senal) {
+                        case Senal.CREAR_TORNEO_PUBLICO               -> manejarCrearTorneo(jugador, false);
+                        case Senal.CREAR_TORNEO_PRIVADO               -> manejarCrearTorneo(jugador, true);
+                        case Senal.UNIRSE_TORNEO,
+                                Senal.INGRESAR_CODIGO_PARTIDA_PRIVADA -> manejarUnirseTorneo(jugador);
+                        case Senal.SOLICITAR_LISTA_TORNEOS            -> manejarListaTorneos(jugador.writter);
+                        default -> false;
 
-                };
+                    };
+                } catch (NoSuchElementException e){
+                    System.out.println("El jugador con IP " + jugador.socket.getInetAddress().getHostName() + " se ha desconectado.");
+                    continuar = false;
+                }
 
             } while (continuar);
         }).start();
     }
 
 
-    private boolean manejarListaTorneos(PrintStream writer) {
+    private boolean manejarListaTorneos(PrintStream writer){
         HashMap<String, Torneo> torneosPublicos = tournamentManager.mostrarTorneos();
         writer.println(Senal.LISTA_TORNEOS);
         writer.println(torneosPublicos.size());
@@ -73,17 +79,17 @@ public class SignalManager {
     }
 
 
-    private boolean manejarUnirseTorneo(Jugador jugador, Scanner reader, PrintStream writer) {
-        String clave = reader.nextLine();
+    private boolean manejarUnirseTorneo(Jugador jugador) throws NoSuchElementException {
+        String clave = jugador.reader.nextLine();
 
-        writer.println(Senal.ENVIAR_NOMBRE);
-        jugador.nombreDeUsuario = reader.nextLine();
+        jugador.writter.println(Senal.ENVIAR_NOMBRE);
+        jugador.nombreDeUsuario = jugador.reader.nextLine();
 
         int resultado = tournamentManager.unirJugadorATorneo(jugador, clave);
 
         System.out.println("Clave: " + clave);
         System.out.println("Resultado: " + resultado);
-        writer.println(resultado);
+        jugador.writter.println(resultado);
 
         return resultado != Senal.UNION_EXITOSA_TORNEO;
     }
@@ -92,18 +98,16 @@ public class SignalManager {
      * Crea un torneo y devuelve la clave para entrar a ese torneo (Solo si el usuario manda su nombre).
      * No unimos al jugador directamente porque no le hemos preguntado su nombre.
      * @param jugador Jugador
-     * @param reader Scanner
-     * @param writter PrintStream
      * @param esPrivado Si el torneo es privado o no
      * @return Clave para unirse al torneo.
      */
-    private boolean manejarCrearTorneo(Jugador jugador, Scanner reader, PrintStream writter, boolean esPrivado) {
-        String nombreDelTorneo = reader.nextLine();
-        int cantidadJugadores = Integer.parseInt(reader.nextLine());
+    private boolean manejarCrearTorneo(Jugador jugador, boolean esPrivado) throws NoSuchElementException {
+        String nombreDelTorneo = jugador.reader.nextLine();
+        int cantidadJugadores = Integer.parseInt(jugador.reader.nextLine());
         System.out.println("Datos:" + nombreDelTorneo + " " + cantidadJugadores);
 
-        writter.println(Senal.ENVIAR_NOMBRE);
-        String nombre = reader.nextLine();
+        jugador.writter.println(Senal.ENVIAR_NOMBRE);
+        String nombre = jugador.reader.nextLine();
 
         jugador.nombreDeUsuario = nombre;
 
@@ -111,11 +115,11 @@ public class SignalManager {
         String clave = tournamentManager.agregarTorneo(jugador, torneo);
         tournamentManager.unirJugadorATorneo(jugador, clave);
 
-        writter.println(Senal.CLAVE_TORNEO);
-        writter.println(clave);
+        jugador.writter.println(Senal.CLAVE_TORNEO);
+        jugador.writter.println(clave);
 
-        writter.println(Senal.CONEXION_EXITOSA_TORNEO);
+        jugador.writter.println(Senal.CONEXION_EXITOSA_TORNEO);
 
-        return true;
+        return false;
     }
 }

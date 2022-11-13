@@ -44,7 +44,7 @@ public class PantallaCreacionTorneo extends JPanel {
         panel_partida_privada.add(lblTorneoPrivado);
 
         panel_partida_publica.addMouseListener(listener(Senal.CREAR_TORNEO_PUBLICO));
-        panel_partida_publica.addMouseListener(listener(Senal.CREAR_TORNEO_PRIVADO));
+        panel_partida_privada.addMouseListener(listener(Senal.CREAR_TORNEO_PRIVADO));
 
 
         this.setSize(500,500);

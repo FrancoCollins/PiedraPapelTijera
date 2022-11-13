@@ -55,7 +55,7 @@ public class Enfrentamiento extends Thread {
             return senal2 == Senal.TIJERA ? p2 : p1;
 
         else
-            return senal1 == Senal.TIJERA ? p2 : p1;
+            return senal2 == Senal.PIEDRA ? p2 : p1;
     }
 
     @Override
@@ -88,25 +88,11 @@ public class Enfrentamiento extends Thread {
                     torneo.enviarSenalAJugador(p2, Senal.SELECCION_INCORRECTA);
                     senal2 = torneo.recibirAccionJugador(p2);
                 }
-            } while (jugadorNoSeHaDesconectado(senal1, senal2) && (seleccionEsIncorrecta(senal1, senal2) || torneo.esError(senal1, senal2)));
+            } while ( (seleccionEsIncorrecta(senal1, senal2) || torneo.esError(senal1, senal2)));
 
             Jugador ganador = ganadorRonda(senal1, senal2);
 
 
-            // Si algún jugador se ha desconectado, el ganador será el otro.
-            if(!jugadorNoSeHaDesconectado(senal1, senal2)){
-                if(senal1 == Senal.DESCONECTADO){
-                    ganadorFinal = p2;
-                    torneo.enviarSenalAJugador(p2, Senal.GANADOR_DE_ENFRENTAMIENTO);
-                }
-                else {
-                    ganadorFinal = p1;
-                    torneo.enviarSenalAJugador(p1, Senal.GANADOR_DE_ENFRENTAMIENTO);
-                }
-
-                Thread.currentThread().interrupt();
-                break;
-            }
 
 
 

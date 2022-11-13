@@ -156,10 +156,17 @@ public class PantallaEnfrentamiento extends JPanel {
 
     public void onEnfrentamientoGanado(){
         mensaje.setText("¡Has ganado el enfrentamiento!");
+        opcionSeleccionada = true;
     }
 
     public void onEnfrentamientoPerdido(){
         mensaje.setText("Has perdido el enfrentamiento :(");
+        opcionSeleccionada = true;
+    }
+
+    public void onEmpezarFinal(){
+        mensaje.setText("¡Empieza la final!");
+        opcionSeleccionada = false;
     }
 
     public void onObtenerPuntaje(int[] puntajes) {
