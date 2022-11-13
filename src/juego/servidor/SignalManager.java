@@ -3,6 +3,8 @@ package juego.servidor;
 import juego.Senal;
 
 import java.io.PrintStream;
+import java.io.Writer;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -73,6 +75,9 @@ public class SignalManager {
 
     private boolean manejarUnirseTorneo(Jugador jugador, Scanner reader, PrintStream writer) {
         String clave = reader.nextLine();
+
+        writer.println(Senal.ENVIAR_NOMBRE);
+        jugador.nombreDeUsuario = reader.nextLine();
 
         int resultado = tournamentManager.unirJugadorATorneo(jugador, clave);
 
