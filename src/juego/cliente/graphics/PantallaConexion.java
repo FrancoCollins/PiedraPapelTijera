@@ -66,5 +66,6 @@ public class PantallaConexion extends JPanel {
 
         revalidate();
         repaint();
+
     }
 }

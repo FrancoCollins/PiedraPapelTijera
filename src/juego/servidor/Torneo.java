@@ -100,10 +100,11 @@ public class Torneo {
     public synchronized void agregarJugador(Jugador jugador) {
         if (jugadores.size() == MAX_PLAYERS) {
             enviarSenalAJugador(jugador, Senal.LOBBY_LLENO);
-            try{
+            try {
                 jugador.socket.close();
-            }catch (IOException e){
+            } catch (IOException e) {
                 System.out.println(e.getMessage());
+                e.printStackTrace();
             }
             return;
         }
@@ -158,7 +159,7 @@ public class Torneo {
                 try {
                     jugador.socket.close();
                 } catch (IOException e) {
-
+                    e.printStackTrace();
                 }
                 jugadores.remove(jugador);
             }
@@ -234,6 +235,7 @@ public class Torneo {
                 Thread.sleep(10_000);
                 revancha.interrupt();
             } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
     }
@@ -263,6 +265,7 @@ public class Torneo {
                     } catch (NumberFormatException e) {
                         senal = Senal.SELECCION_INCORRECTA;
                         enviarSenalAJugador(jugador, senal);
+                        e.printStackTrace();
                     }
                 } while (senal != Senal.NO && senal != Senal.SI);
 
@@ -271,6 +274,7 @@ public class Torneo {
                 e.printStackTrace();
             } catch (NoSuchElementException e) {
                 System.out.println(jugador.nombreDeUsuario + " se ha desconectado");
+                e.printStackTrace();
             }
         }
 
@@ -278,6 +282,7 @@ public class Torneo {
             return senal;
         }
     }
+
     public boolean isPrivado() {
         return privado;
     }

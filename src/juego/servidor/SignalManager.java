@@ -46,6 +46,7 @@ public class SignalManager {
                 int senal = Senal.ERROR;
 
                 senal = Integer.parseInt(resultado_str);
+                System.out.println("Senal recibida en el servidor: " +senal);
 
 
                 switch (senal) {
