@@ -32,16 +32,15 @@ public class PantallaUnirseTorneo extends JPanel {
         unirse_torneo.addActionListener(e -> graphics.getFunctionality().getSignalManager().enviarSenal(Senal.UNIRSE_TORNEO));
         unirse_torneo.setSize(144,27);
 
-
         entradaCodigoTorneo = new JTextField();
-
 
         this.setSize(500, 500);
         this.setVisible(true);
     }
 
     public void onListaTorneo(JTable tabla){
-        tabla.setBounds(200, 200, 200, 200);
+        this.tablaTorneos = tabla;
+        this.tablaTorneos.setBounds(200, 200, 200, 200);
         this.add(tabla);
 
     }

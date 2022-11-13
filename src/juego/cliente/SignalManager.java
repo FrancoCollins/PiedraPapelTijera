@@ -218,8 +218,9 @@ public class SignalManager extends Thread {
         modelo.addColumn("Cantidad de jugadores");
         modelo.addColumn("Clave");
         modelo.addColumn("Cantidad maxima de jugadores");
-        for (int i = 0; i < torneos; i++) {
+        for (int i = 0; i < 4; i++) {
             String datos = reader.nextLine();
+            datos = "Hola"+Senal.SEPARADOR+"como"+Senal.SEPARADOR+"estas"+Senal.SEPARADOR+"?";
             String[] datosSplit = datos.split("\\|");
             modelo.addColumn(datosSplit);
             System.out.println("Datos recibidos: " + datos);

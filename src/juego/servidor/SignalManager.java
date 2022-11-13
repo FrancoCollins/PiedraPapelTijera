@@ -62,6 +62,7 @@ public class SignalManager {
 
     private void manejarListaTorneos(PrintStream writer) {
         HashMap<String, Torneo> torneosPublicos = tournamentManager.mostrarTorneos();
+        writer.println(Senal.LISTA_TORNEOS);
         writer.println(torneosPublicos.size());
         torneosPublicos.forEach((key, value) -> {
             writer.println(value.getNombreTorneo()+Senal.SEPARADOR+value.getJugadores().size()+Senal.SEPARADOR+key+Senal.SEPARADOR+value.getMAX_PLAYERS());
