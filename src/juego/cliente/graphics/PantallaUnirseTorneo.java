@@ -7,8 +7,9 @@ import java.awt.*;
 
 public class PantallaUnirseTorneo extends PantallaBase {
 
-    private JTable tablaTorneos;
     private JTextField entradaCodigoTorneo;
+
+    JScrollPane panel_tabla;
 
     private JLabel titulo;
 
@@ -51,17 +52,19 @@ public class PantallaUnirseTorneo extends PantallaBase {
     private void refrescar() {
         graphics.getFunctionality().getSignalManager().enviarSenal(Senal.SOLICITAR_LISTA_TORNEOS);
         System.out.println("Enviada senal de solicitar lista torneos");
-        this.revalidate();
-        this.repaint();
     }
 
     public void onListaTorneoRecibida(JTable tabla) {
-        this.tablaTorneos = tabla;
+        if(panel_tabla != null)
+            this.remove(panel_tabla);
 
-        JScrollPane panel_tabla = new JScrollPane(tabla);
+        this.panel_tabla = new JScrollPane(tabla);
         panel_tabla.setSize(500, 300);
         panel_tabla.setLocation(0, 100);
         this.add(panel_tabla);
+        System.out.println(tabla.getRowCount());
+
+
 
         unirse_torneo.addActionListener(e -> {
             if (tabla.getRowCount() == 0)
@@ -74,15 +77,13 @@ public class PantallaUnirseTorneo extends PantallaBase {
             graphics.getFunctionality().getSignalManager().enviarSenal(Senal.UNIRSE_TORNEO_PUBLICO);
             graphics.getFunctionality().getSignalManager().enviarPaquete(clave);
         });
-        panel_tabla.revalidate();
-        panel_tabla.repaint();
-        revalidate();
-        repaint();
+        this.revalidate();
+        this.repaint();
     }
 
     private void cambiarAUnirseTorneoPrivado() {
         this.btn_TorneoPrivado.setVisible(false);
-        this.tablaTorneos.setVisible(false);
+        this.panel_tabla.setVisible(false);
         this.titulo.setVisible(false);
         this.unirse_torneo.setVisible(false);
 
@@ -110,3 +111,4 @@ public class PantallaUnirseTorneo extends PantallaBase {
         repaint();
     }
 }
+
