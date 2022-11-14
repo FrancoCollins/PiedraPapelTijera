@@ -30,7 +30,8 @@ public class PantallaLobby extends PantallaBase {
 
 
         lbl_nombreTorneo = new JLabel();
-        lbl_nombreTorneo.setSize(200, 40);
+        lbl_nombreTorneo.setSize(500, 40);
+        lbl_nombreTorneo.setLocation(0, 80);
         lbl_nombreTorneo.setFont(lbl_nombreTorneo.getFont().
                 deriveFont(Font.PLAIN, 35));
         this.add(lbl_nombreTorneo);
@@ -45,7 +46,7 @@ public class PantallaLobby extends PantallaBase {
     public void onClaveTorneo(String clave) {
         lbl_MostrarClaveTorneo = new JLabel("Clave del torneo:");
         lbl_MostrarClaveTorneo.setSize(200,30);
-        lbl_MostrarClaveTorneo.setLocation(40,30);
+        lbl_MostrarClaveTorneo.setLocation(40,130);
         lbl_MostrarClaveTorneo.setFont(lbl_MostrarClaveTorneo.getFont()
                 .deriveFont(Font.PLAIN, 20));
         this.add(lbl_MostrarClaveTorneo);
@@ -57,7 +58,7 @@ public class PantallaLobby extends PantallaBase {
         lbl_claveTorneo.setBorder(null); // remove the border
         lbl_claveTorneo.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
         lbl_claveTorneo.setSize(150, 30);
-        lbl_claveTorneo.setLocation(40, 80);
+        lbl_claveTorneo.setLocation(40, 170);
         this.lbl_claveTorneo.setText(clave);
         this.add(lbl_claveTorneo);
 

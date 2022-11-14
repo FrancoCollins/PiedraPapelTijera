@@ -17,6 +17,12 @@ public abstract class PantallaBase extends JPanel {
         setSize(ancho, alto);
         setVisible(true);
 
-
+        boton_volver = new JButton("Volver");
+        boton_volver.setLocation(20,20);
+        boton_volver.setSize(150, 30);
+        boton_volver.addActionListener(e -> {
+            graphics.cambiarPantalla(graphics.getPantallaInicial());
+        });
+        this.add(boton_volver);
     }
 }

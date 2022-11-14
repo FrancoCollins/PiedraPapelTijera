@@ -1,6 +1,7 @@
 package juego.cliente;
 
 
+import juego.Senal;
 import juego.cliente.graphics.Graphics;
 
 import java.io.*;
@@ -9,7 +10,7 @@ import java.util.Scanner;
 
 public class Main {
 	public static final int PUERTO = 1043;
-	public static final String IP_SERVER = "10.34.73.226";
+	public static final String IP_SERVER = "localhost";
 
 	public static String nombre;
 
@@ -34,6 +35,10 @@ public class Main {
 
 			SignalManager manager = new SignalManager(entrada, salida, game);
 			game.setSignalManager(manager);
+
+			manager.enviarSenal(Senal.CONECTARSE);
+			System.out.println("Enviada senal de conectarse");
+
 
 			manager.start();
 		} catch (UnknownHostException e) {

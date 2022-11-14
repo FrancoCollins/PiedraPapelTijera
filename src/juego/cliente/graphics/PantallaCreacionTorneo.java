@@ -23,7 +23,7 @@ public class PantallaCreacionTorneo extends PantallaBase {
         this.add(pnl_partidaPublica);
 
         JLabel img_torneoPublico = new JLabel("");
-        img_torneoPublico.setIcon(new ImageIcon(PantallaCreacionTorneo.class.getResource("/juego/cliente/graphics/img/partida_privada.png")));
+        img_torneoPublico.setIcon(new ImageIcon(PantallaCreacionTorneo.class.getResource("/juego/cliente/graphics/img/partida_publica.png")));
         pnl_partidaPublica.add(img_torneoPublico);
 
         JLabel lblTorneoPublico = new JLabel("Torneo Público");
@@ -38,7 +38,7 @@ public class PantallaCreacionTorneo extends PantallaBase {
         this.add(pnl_partidaPrivada);
 
         JLabel img_torneoPrivado = new JLabel("");
-        img_torneoPrivado.setIcon(new ImageIcon(PantallaCreacionTorneo.class.getResource("/juego/cliente/graphics/img/partida_publica.png")));
+        img_torneoPrivado.setIcon(new ImageIcon(PantallaCreacionTorneo.class.getResource("/juego/cliente/graphics/img/partida_privada.png")));
         pnl_partidaPrivada.add(img_torneoPrivado);
 
         JLabel lblTorneoPrivado = new JLabel("Torneo Privado");
@@ -73,7 +73,6 @@ public class PantallaCreacionTorneo extends PantallaBase {
         btn_enviar.setLocation(70, 320);
         btn_enviar.addActionListener(e -> {
             graphics.setNombreTorneo(txt_nombreTorneo.getText());
-            graphics.getFunctionality().getSignalManager().enviarSenalDeConexion();
             graphics.getFunctionality().getSignalManager().enviarSenal(senal);
             graphics.getFunctionality().getSignalManager().enviarPaquete(txt_nombreTorneo.getText());
             graphics.getFunctionality().getSignalManager().enviarPaquete("4");

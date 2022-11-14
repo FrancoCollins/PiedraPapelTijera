@@ -16,6 +16,7 @@ public class PantallaInicial extends PantallaBase {
 
     public PantallaInicial(Graphics graphics){
         super(graphics);
+        this.boton_volver.setVisible(false);
 
         titulo = new JLabel("Piedra, Papel, o Tijera!");
         titulo.setFont(new Font("TSCu_Comic", Font.BOLD, 34));
@@ -24,12 +25,7 @@ public class PantallaInicial extends PantallaBase {
         this.add(titulo);
 
         joinServer = new JButton("Unirse a un torneo");
-        joinServer.addActionListener(e -> {
-            graphics.getFunctionality().getSignalManager().enviarSenal(Senal.CONECTARSE);
-            System.out.println("Enviada senal de conectarse");
-            graphics.getFunctionality().getSignalManager().enviarSenal(Senal.SOLICITAR_LISTA_TORNEOS);
-            System.out.println("Enviada senal de solicitar lista torneos");
-            graphics.cambiarPantalla(graphics.getPantallaUnirseTorneo());
+        joinServer.addActionListener(e -> {manejarUnirseTorneo();
         });
         joinServer.setSize(144,27);
 
@@ -41,5 +37,11 @@ public class PantallaInicial extends PantallaBase {
         joinServer.setLocation(262, 228);
         this.add(joinServer);
 
+    }
+
+    private void manejarUnirseTorneo(){
+        graphics.getFunctionality().getSignalManager().enviarSenal(Senal.SOLICITAR_LISTA_TORNEOS);
+        System.out.println("Enviada senal de solicitar lista torneos");
+        graphics.cambiarPantalla(graphics.getPantallaUnirseTorneo());
     }
 }
