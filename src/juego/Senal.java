@@ -65,8 +65,8 @@ public class Senal {
 
     public static final int CREAR_TORNEO_PUBLICO            = 10001;
     public static final int CREAR_TORNEO_PRIVADO            = 10002;
-    public static final int UNIRSE_TORNEO                   = 10003;
-    public static final int INGRESAR_CODIGO_PARTIDA_PRIVADA = 10004;
+    public static final int UNIRSE_TORNEO_PUBLICO = 10003;
+    public static final int UNIRSE_TORNEO_PRIVADO = 10004;
     public static final int SOLICITAR_LISTA_TORNEOS         = 10005;
 
 
@@ -76,7 +76,7 @@ public class Senal {
     public static final int TORNEO_INEXISTENTE              = 20002;
     public static final int UNION_EXITOSA_TORNEO            = 20004;
     public static final int LISTA_TORNEOS                   = 20005;
-
     public static final int CLAVE_TORNEO                    = 20006;
+    public static final int NOMBRE_TORNEO                   = 20007;
 }
 
