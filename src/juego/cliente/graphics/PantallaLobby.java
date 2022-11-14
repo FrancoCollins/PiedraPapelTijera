@@ -3,9 +3,7 @@ package juego.cliente.graphics;
 import javax.swing.*;
 import java.awt.*;
 
-public class PantallaLobby extends JPanel {
-
-    private Graphics graphics;
+public class PantallaLobby extends PantallaBase {
 
     private JLabel lbl_jugadores;
 
@@ -18,7 +16,7 @@ public class PantallaLobby extends JPanel {
     private JLabel lbl_nombreTorneo;
 
     public PantallaLobby(Graphics graphics){
-        this.graphics = graphics;
+        super(graphics);
 
         lbl_jugadores = new JLabel("Jugadores en el lobby: ");
         lbl_jugadores.setSize(200,30);
@@ -37,11 +35,6 @@ public class PantallaLobby extends JPanel {
                 deriveFont(Font.PLAIN, 35));
         this.add(lbl_nombreTorneo);
 
-
-
-        this.setSize(500,500);
-        this.setLayout(null);
-        this.setVisible(true);
     }
 
     public void onJugadoresEnLobby(String j){

@@ -2,9 +2,8 @@ package juego.cliente.graphics;
 
 import javax.swing.*;
 
-public class PantallaConexion extends JPanel {
+public class PantallaConexion extends PantallaBase {
 
-    private Graphics graphics;
     private JLabel conexion;
 
     private JLabel lbl_nombre;
@@ -13,7 +12,7 @@ public class PantallaConexion extends JPanel {
     private JButton enviar;
 
     public PantallaConexion(Graphics graphics){
-        this.graphics = graphics;
+        super(graphics);
         nombreDeUsuario = new JTextField();
         lbl_nombre = new JLabel("Nombre de usuario: ");
         conexion = new JLabel("Conectando...");
@@ -26,9 +25,6 @@ public class PantallaConexion extends JPanel {
 
         conexion.setSize(200,200);
 
-        this.setLayout(null);
-        this.setSize(500,500);
-        this.setVisible(true);
     }
 
     public void onConectando(){

@@ -5,7 +5,7 @@ import juego.Senal;
 import javax.swing.*;
 import java.awt.*;
 
-public class PantallaUnirseTorneo extends JPanel {
+public class PantallaUnirseTorneo extends PantallaBase {
 
     private JTable tablaTorneos;
     private JTextField entradaCodigoTorneo;
@@ -21,13 +21,12 @@ public class PantallaUnirseTorneo extends JPanel {
 
 
     public PantallaUnirseTorneo(Graphics graphics) {
-        this.graphics = graphics;
+        super(graphics);
 
         titulo = new JLabel("Lista de torneos disponibles");
         titulo.setFont(new Font("TSCu_Comic", Font.BOLD, 34));
         titulo.setSize(500, 27);
         titulo.setLocation(0,58);
-        setLayout(null);
         this.add(titulo);
 
 
@@ -42,9 +41,6 @@ public class PantallaUnirseTorneo extends JPanel {
         btn_TorneoPrivado.addActionListener((event) -> cambiarAUnirseTorneoPrivado());
         this.add(btn_TorneoPrivado);
 
-
-        this.setSize(500, 500);
-        this.setVisible(true);
     }
 
     public void onListaTorneoRecibida(JTable tabla){

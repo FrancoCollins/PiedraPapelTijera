@@ -10,6 +10,10 @@ public class Final extends Enfrentamiento {
 
     @Override
     public void run() {
+        torneo.enviarSenalAJugadores(p1, p2, Senal.NOMBRE_DEL_RIVAL);
+        torneo.enviarPaqueteAJugador(p1, p2.nombreDeUsuario);
+        torneo.enviarPaqueteAJugador(p2, p1.nombreDeUsuario);
+
         System.out.println("Comienza la final!");
         torneo.enviarSenalAJugadores(p1, p2, Senal.COMENZAR_PARTIDA_FINAL);
         while (getPuntajeP1() < 3 && getPuntajeP2() < 3) {

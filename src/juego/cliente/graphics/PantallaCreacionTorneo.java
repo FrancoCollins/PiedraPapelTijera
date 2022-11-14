@@ -6,9 +6,8 @@ import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class PantallaCreacionTorneo extends JPanel {
+public class PantallaCreacionTorneo extends PantallaBase {
 
-    private Graphics graphics;
 
     private boolean senalEnviada = false;
 
@@ -17,11 +16,10 @@ public class PantallaCreacionTorneo extends JPanel {
     private JPanel pnl_partidaPrivada;
 
     public PantallaCreacionTorneo(Graphics graphics){
-        this.graphics = graphics;
-
+        super(graphics);
 
         pnl_partidaPublica = new JPanel();
-        pnl_partidaPublica.setBounds(226, 60, 200, 250);
+        pnl_partidaPublica.setBounds(125, 230, 250, 250);
         this.add(pnl_partidaPublica);
 
         JLabel img_torneoPublico = new JLabel("");
@@ -36,7 +34,7 @@ public class PantallaCreacionTorneo extends JPanel {
 
 
         pnl_partidaPrivada = new JPanel();
-        pnl_partidaPrivada.setBounds(226, 60, 200, 250);
+        pnl_partidaPrivada.setBounds(125, 0, 250, 250);
         this.add(pnl_partidaPrivada);
 
         JLabel img_torneoPrivado = new JLabel("");

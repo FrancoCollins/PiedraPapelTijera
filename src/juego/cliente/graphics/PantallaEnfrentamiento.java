@@ -7,9 +7,7 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class PantallaEnfrentamiento extends JPanel {
-
-    private Graphics graphics;
+public class PantallaEnfrentamiento extends PantallaBase {
 
     private JLabel mensaje;
 
@@ -27,9 +25,7 @@ public class PantallaEnfrentamiento extends JPanel {
     private boolean opcionSeleccionada = false;
 
     public PantallaEnfrentamiento(Graphics graphics) {
-        this.graphics = graphics;
-        this.setSize(500,500);
-        setLayout(null);
+        super(graphics);
 
 
         puntaje = new JLabel("0 | 0");
@@ -153,6 +149,8 @@ public class PantallaEnfrentamiento extends JPanel {
         mensaje.setText("Empate!!!");
         opcionSeleccionada = false;
     }
+
+
 
     public void onEnfrentamientoGanado(){
         mensaje.setText("¡Has ganado el enfrentamiento!");

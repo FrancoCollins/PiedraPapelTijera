@@ -7,9 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PantallaInicial extends JPanel {
-
-    private Graphics graphics;
+public class PantallaInicial extends PantallaBase {
 
     private JLabel titulo;
 
@@ -17,13 +15,12 @@ public class PantallaInicial extends JPanel {
     private JButton joinServer;
 
     public PantallaInicial(Graphics graphics){
-        this.graphics = graphics;
+        super(graphics);
 
         titulo = new JLabel("Piedra, Papel, o Tijera!");
         titulo.setFont(new Font("TSCu_Comic", Font.BOLD, 34));
         titulo.setSize(371, 147);
         titulo.setLocation(57,58);
-        setLayout(null);
         this.add(titulo);
 
         joinServer = new JButton("Unirse a un torneo");
@@ -44,7 +41,5 @@ public class PantallaInicial extends JPanel {
         joinServer.setLocation(262, 228);
         this.add(joinServer);
 
-        this.setSize(500,500);
-        this.setVisible(true);
     }
 }
