@@ -135,11 +135,11 @@ public class Enfrentamiento extends Thread {
         if (puntajeP1 == 3) {
             ganadorFinal = p1;
             torneo.enviarSenalAJugador(p1, Senal.GANADOR_DE_ENFRENTAMIENTO);
-            torneo.enviarSenalAJugador(p2, Senal.PERDEDOR_DE_ENFRENTAMIENTO);
+            torneo.enviarSenalAJugador(p2, Senal.PERDEDOR_DE_TORNEO);
         } else {
             ganadorFinal = p2;
             torneo.enviarSenalAJugador(p2, Senal.GANADOR_DE_ENFRENTAMIENTO);
-            torneo.enviarSenalAJugador(p1, Senal.PERDEDOR_DE_ENFRENTAMIENTO);
+            torneo.enviarSenalAJugador(p1, Senal.PERDEDOR_DE_TORNEO);
         }
 
         torneo.enviarSenalAJugadores(p1, p2, Senal.NOMBRE_GANADOR_DEL_ENFRENTAMIENTO);

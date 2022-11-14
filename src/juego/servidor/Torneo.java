@@ -180,7 +180,7 @@ public class Torneo {
                 for (Jugador jugador : jugadores) {
                     enviarSenalAJugador(jugador, Senal.NOMBRE_GANADOR_DEL_TORNEO);
                     enviarPaqueteAJugador(jugador, ganador.nombreDeUsuario);
-                    new Thread(preguntarRevancha(jugador)).start();
+                  //  new Thread(preguntarRevancha(jugador)).start();
                 }
 
                 // Esperar a que todos hayan contestado

@@ -67,11 +67,13 @@ public class Final extends Enfrentamiento {
             torneo.enviarSenalAJugador(getP1(), Senal.GANADOR_DE_ENFRENTAMIENTO);
             torneo.enviarSenalAJugador(getP1(), Senal.GANADOR_DE_TORNEO);
             torneo.enviarSenalAJugador(getP2(), Senal.PERDEDOR_DE_ENFRENTAMIENTO);
+            torneo.enviarSenalAJugador(getP2(), Senal.PERDEDOR_DE_TORNEO);
         } else {
             setGanadorFinal(getP2());
             torneo.enviarSenalAJugador(getP2(), Senal.GANADOR_DE_ENFRENTAMIENTO);
             torneo.enviarSenalAJugador(getP2(), Senal.GANADOR_DE_TORNEO);
             torneo.enviarSenalAJugador(getP1(), Senal.PERDEDOR_DE_ENFRENTAMIENTO);
+            torneo.enviarSenalAJugador(getP1(), Senal.PERDEDOR_DE_TORNEO);
         }
 
         torneo.enviarPaqueteAJugadores(p1, p2, getGanadorFinal().nombreDeUsuario);

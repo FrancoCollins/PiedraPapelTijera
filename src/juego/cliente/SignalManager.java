@@ -39,6 +39,7 @@ public class SignalManager extends Thread {
                     case Senal.ENVIAR_SELECCION:                    manejarEnviarSeleccion();           break;
                     case Senal.GANADOR_DE_RONDA:                    manejarRondaGanada();               break;
                     case Senal.PERDEDOR_DE_RONDA:                   manejarRondaPerdida();              break;
+                    case Senal.PERDEDOR_DE_TORNEO:                  manejarPerderTorneo();              break;
                     case Senal.EMPATE:                              manejarEmpate();                    break;
                     case Senal.GANADOR_DE_ENFRENTAMIENTO:           manejarEnfrentamientoGanado();      break;
                     case Senal.PERDEDOR_DE_ENFRENTAMIENTO:          manejarEnfrentamientoPerdido();     break;
@@ -68,6 +69,10 @@ public class SignalManager extends Thread {
             }
 
         } while (true);
+    }
+
+    private void manejarPerderTorneo() {
+        game.getGraphics().cambiarPantalla(game.getGraphics().getPantallaPerdedorTorneo());
     }
 
     private void manejarNombreTorneo() {
@@ -122,6 +127,7 @@ public class SignalManager extends Thread {
 
     public void manejarTorneoGanado() {
         System.out.println("¡Has ganado el torneo!");
+        game.getGraphics().cambiarPantalla(game.graphics.getPantallaGanadorTorneo());
         game.actualizarContinuarPartida(false);
         game.actualizarContinuarTorneo(false);
     }

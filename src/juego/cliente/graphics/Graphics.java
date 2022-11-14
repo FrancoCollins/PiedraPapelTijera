@@ -3,9 +3,10 @@ package juego.cliente.graphics;
 import juego.cliente.GameFunctionality;
 
 import javax.swing.*;
-import java.util.Stack;
 
 public class Graphics extends JFrame {
+
+    private Pantalla_ganador pantallaGanadorTorneo;
 
     private PantallaInicial pantallaInicial;
 
@@ -20,11 +21,13 @@ public class Graphics extends JFrame {
     private PantallaUnirseTorneo pantallaUnirseTorneo;
 
     private GameFunctionality functionality;
-
+    private PantallaPerdedorTorneo pantallaPerdedorTorneo;
 
 
     public Graphics(GameFunctionality functionality){
         this.functionality = functionality;
+        this.pantallaPerdedorTorneo = new PantallaPerdedorTorneo(this);
+        this.pantallaGanadorTorneo = new Pantalla_ganador(this);
         this.pantallaEnfrentamiento = new PantallaEnfrentamiento(this);
         this.pantallaInicial = new PantallaInicial(this);
         this.pantallaConexion = new PantallaConexion(this);
@@ -131,8 +134,21 @@ public class Graphics extends JFrame {
 
         this.setContentPane(pantallaSiguiente);
     }
+
+    public Pantalla_ganador getPantallaGanadorTorneo() {
+        return pantallaGanadorTorneo;
+    }
+
+    public void setPantallaGanadorTorneo(Pantalla_ganador pantallaGanadorTorneo) {
+        this.pantallaGanadorTorneo = pantallaGanadorTorneo;
+    }
+
     public void volver() {
         this.setContentPane(pantallaInicial);
+    }
+
+    public PantallaPerdedorTorneo getPantallaPerdedorTorneo() {
+        return this.pantallaPerdedorTorneo;
     }
 }
 
