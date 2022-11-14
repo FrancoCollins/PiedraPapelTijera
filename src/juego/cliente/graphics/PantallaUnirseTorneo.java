@@ -16,6 +16,10 @@ public class PantallaUnirseTorneo extends JPanel {
 
     private JButton unirse_torneo;
 
+    private JButton btn_TorneoPrivado;
+
+
+
     public PantallaUnirseTorneo(Graphics graphics) {
         this.graphics = graphics;
 
@@ -28,11 +32,16 @@ public class PantallaUnirseTorneo extends JPanel {
 
 
         unirse_torneo = new JButton("Unirse al torneo");
-        unirse_torneo.setSize(144,27);
-        unirse_torneo.setLocation(150, 420);
+        unirse_torneo.setSize(150,30);
+        unirse_torneo.setLocation(70, 420);
         this.add(unirse_torneo);
 
-        entradaCodigoTorneo = new JTextField();
+        btn_TorneoPrivado = new JButton("Torneo Privado");
+        btn_TorneoPrivado.setSize(150,30);
+        btn_TorneoPrivado.setLocation(250,420);
+        btn_TorneoPrivado.addActionListener((event) -> cambiarAUnirseTorneoPrivado());
+        this.add(btn_TorneoPrivado);
+
 
         this.setSize(500, 500);
         this.setVisible(true);
@@ -54,9 +63,11 @@ public class PantallaUnirseTorneo extends JPanel {
             String clave = tabla.getValueAt(tabla.getSelectedRow(), columnaConLaClave).toString();
 
             graphics.getFunctionality().setClaveTorneo(clave);
-            graphics.getFunctionality().getSignalManager().enviarSenal(Senal.UNIRSE_TORNEO);
+            graphics.getFunctionality().getSignalManager().enviarSenal(Senal.UNIRSE_TORNEO_PUBLICO);
             graphics.getFunctionality().getSignalManager().enviarPaquete(clave);
         });
+
+
 
         // COMIENZO DE UNIRSE A TORNEO CON CODIGO Y BOTON DE REFRESCAR TABLA
 
@@ -69,9 +80,37 @@ public class PantallaUnirseTorneo extends JPanel {
 
 
 
-
-
         // FINAL DE UNIRSE A TORNEO CON CODIGO Y BOTON DE REFRESCAR TABLA
+
+        revalidate();
+        repaint();
+    }
+
+    private void cambiarAUnirseTorneoPrivado(){
+        this.btn_TorneoPrivado.setVisible(false);
+        this.tablaTorneos.setVisible(false);
+        this.titulo.setVisible(false);
+        this.unirse_torneo.setVisible(false);
+
+        JLabel lbl_ingreseElCodigo = new JLabel("Ingrese el código del torneo.");
+        lbl_ingreseElCodigo.setSize(300,40);
+        lbl_ingreseElCodigo.setLocation(30,50);
+        this.add(lbl_ingreseElCodigo);
+
+        JTextField codigo = new JTextField();
+        codigo.setSize(200,30);
+        codigo.setLocation(150, 200);
+        this.add(codigo);
+
+        JButton btn_unirseAlTorneo = new JButton("Unirse al torneo");
+        btn_unirseAlTorneo.setSize(200, 30);
+        btn_unirseAlTorneo.setLocation(70, 420);
+        btn_unirseAlTorneo.addActionListener( e -> {
+            System.out.println("Enviado codigo " + codigo.getText());
+            graphics.getFunctionality().getSignalManager().enviarSenal(Senal.UNIRSE_TORNEO_PRIVADO);
+            graphics.getFunctionality().getSignalManager().enviarPaquete(codigo.getText());
+        });
+        this.add(btn_unirseAlTorneo);
 
         revalidate();
         repaint();

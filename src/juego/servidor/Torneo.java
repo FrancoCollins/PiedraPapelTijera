@@ -26,20 +26,20 @@ public class Torneo {
     private String nombreTorneo;
 
     public Torneo(boolean esPrivado, int max_players) {
-        MAX_PLAYERS = max_players;
-        jugadores = new ArrayList<>();
-        enfrentamientos = new ArrayList<>();
-        finalistas = new ArrayList<>();
+        this.MAX_PLAYERS = max_players;
+        this.jugadores = new ArrayList<>();
+        this.enfrentamientos = new ArrayList<>();
+        this.finalistas = new ArrayList<>();
         this.privado = esPrivado;
     }
 
     public Torneo(boolean esPrivado, String nombreTorneo, int max_players) {
-        jugadores = new ArrayList<>();
-        enfrentamientos = new ArrayList<>();
-        finalistas = new ArrayList<>();
+        this.jugadores = new ArrayList<>();
+        this.enfrentamientos = new ArrayList<>();
+        this.finalistas = new ArrayList<>();
         this.privado = esPrivado;
         this.nombreTorneo = nombreTorneo;
-        MAX_PLAYERS = max_players;
+        this.MAX_PLAYERS = max_players;
     }
 
     public void enviarPaqueteAJugador(Jugador jugador, String paquete) {
@@ -61,18 +61,15 @@ public class Torneo {
     }
 
     public int recibirAccionJugador(Jugador jugador) {
-        try {
-
-            InputStream stream = jugador.socket.getInputStream();
-            BufferedReader sc = new BufferedReader(new InputStreamReader(stream));
-            return Integer.parseInt(sc.readLine());
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (NumberFormatException e){
+        try{
+            return Integer.parseInt(jugador.reader.nextLine());
+        } catch (NumberFormatException | NoSuchElementException e){
             return Senal.DESCONECTADO;
+        } catch (Exception e){
+            e.printStackTrace();
+            return Senal.ERROR;
         }
 
-        return Senal.ERROR;
     }
 
     public int[] recibirAcciones(Jugador p1, Jugador p2, int senal1, int senal2) {

@@ -4,7 +4,6 @@ import juego.Senal;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
 import java.io.*;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -57,6 +56,7 @@ public class SignalManager extends Thread {
                     case Senal.NOMBRE_DEL_RIVAL:                    manejarNombreDelRival();            break;
                     case Senal.CLAVE_TORNEO:                        manejarClaveTorneo();               break;
                     case Senal.LISTA_TORNEOS:                       manejarListaTorneos();              break;
+                    case Senal.NOMBRE_TORNEO:                       manejarNombreTorneo();              break;
                     case Senal.LOBBY_LLENO:                         manejarLobbyLleno();                break;
                     case Senal.ERROR:                               manejarError();                     break;
                 }
@@ -70,13 +70,16 @@ public class SignalManager extends Thread {
         } while (true);
     }
 
-    private void manejarUnionExitosaTorneo() {
-        game.getGraphics().onConexionExitosaTorneo();
+    private void manejarNombreTorneo() {
+        String nombreDelTorneo = reader.nextLine();
+        game.getGraphics().setNombreTorneo(nombreDelTorneo);
     }
+
 
     private void manejarClaveTorneo() {
         String clave = reader.nextLine();
-        game.getGraphics().getFunctionality().setClaveTorneo(clave);
+        game.getGraphics().onClaveTorneo(clave);
+
     }
 
     public void enviarSenal(int senal) {

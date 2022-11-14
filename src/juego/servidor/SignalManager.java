@@ -3,12 +3,9 @@ package juego.servidor;
 import juego.Senal;
 
 import java.io.PrintStream;
-import java.io.Writer;
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
-import java.util.Scanner;
 
 public class SignalManager {
 
@@ -45,8 +42,8 @@ public class SignalManager {
                     continuar = switch (senal) {
                         case Senal.CREAR_TORNEO_PUBLICO               -> manejarCrearTorneo(jugador, false);
                         case Senal.CREAR_TORNEO_PRIVADO               -> manejarCrearTorneo(jugador, true);
-                        case Senal.UNIRSE_TORNEO,
-                                Senal.INGRESAR_CODIGO_PARTIDA_PRIVADA -> manejarUnirseTorneo(jugador);
+                        case Senal.UNIRSE_TORNEO_PUBLICO,
+                                Senal.UNIRSE_TORNEO_PRIVADO -> manejarUnirseTorneo(jugador);
                         case Senal.SOLICITAR_LISTA_TORNEOS            -> manejarListaTorneos(jugador.writter);
                         default -> false;
 
@@ -80,6 +77,7 @@ public class SignalManager {
 
 
     private boolean manejarUnirseTorneo(Jugador jugador) throws NoSuchElementException {
+        System.out.println("Unirse");
         String clave = jugador.reader.nextLine();
 
         jugador.writter.println(Senal.ENVIAR_NOMBRE);
@@ -90,6 +88,12 @@ public class SignalManager {
         System.out.println("Clave: " + clave);
         System.out.println("Resultado: " + resultado);
         jugador.writter.println(resultado);
+
+        if(resultado == Senal.UNION_EXITOSA_TORNEO){
+            jugador.writter.println(Senal.NOMBRE_TORNEO);
+            jugador.writter.println(tournamentManager.obtenerTorneo(clave).getNombreTorneo());
+
+        }
 
         return resultado != Senal.UNION_EXITOSA_TORNEO;
     }
@@ -107,16 +111,16 @@ public class SignalManager {
         System.out.println("Datos:" + nombreDelTorneo + " " + cantidadJugadores);
 
         jugador.writter.println(Senal.ENVIAR_NOMBRE);
-        String nombre = jugador.reader.nextLine();
-
-        jugador.nombreDeUsuario = nombre;
+        jugador.nombreDeUsuario = jugador.reader.nextLine();
 
         Torneo torneo = new Torneo(esPrivado, nombreDelTorneo, cantidadJugadores);
         String clave = tournamentManager.agregarTorneo(jugador, torneo);
         tournamentManager.unirJugadorATorneo(jugador, clave);
 
-        jugador.writter.println(Senal.CLAVE_TORNEO);
-        jugador.writter.println(clave);
+        if(esPrivado){
+            jugador.writter.println(Senal.CLAVE_TORNEO);
+            jugador.writter.println(clave);
+        }
 
         jugador.writter.println(Senal.CONEXION_EXITOSA_TORNEO);
 

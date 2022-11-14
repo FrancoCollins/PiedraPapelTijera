@@ -18,6 +18,10 @@ public class GameFunctionality {
 
     private String claveTorneo = null;
 
+    private String nombreDelJugador = null;
+
+    private String nombreTorneo;
+
 
     public void actualizarContinuarPartida(boolean continuar){
         this.continuarPartida = continuar;
@@ -46,4 +50,5 @@ public class GameFunctionality {
     public void setClaveTorneo(String clave) {
         this.claveTorneo = clave;
     }
+
 }

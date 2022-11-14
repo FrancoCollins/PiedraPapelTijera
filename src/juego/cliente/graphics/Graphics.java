@@ -108,5 +108,13 @@ public class Graphics extends JFrame {
         return pantallaUnirseTorneo;
     }
 
+    public void onClaveTorneo(String clave) {
+        functionality.setClaveTorneo(clave);
+        pantallaLobby.onClaveTorneo(clave);
+    }
+
+    public void setNombreTorneo(String nombreTorneo) {
+        pantallaLobby.setNombreTorneo(nombreTorneo);
+    }
 }
 
