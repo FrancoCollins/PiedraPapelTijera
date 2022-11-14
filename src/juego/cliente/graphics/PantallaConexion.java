@@ -27,6 +27,7 @@ public class PantallaConexion extends PantallaBase {
 
     }
 
+
     public void onConectando(){
         conexion.setText("Conectando...");
 

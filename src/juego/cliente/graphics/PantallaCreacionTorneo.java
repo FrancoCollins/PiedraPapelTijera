@@ -52,6 +52,8 @@ public class PantallaCreacionTorneo extends PantallaBase {
         this.setVisible(true);
     }
 
+
+
     private void pedirNombreDelTorneo(int senal){
         this.pnl_partidaPrivada.setVisible(false);
         this.pnl_partidaPublica.setVisible(false);
@@ -76,7 +78,7 @@ public class PantallaCreacionTorneo extends PantallaBase {
             graphics.getFunctionality().getSignalManager().enviarPaquete(txt_nombreTorneo.getText());
             graphics.getFunctionality().getSignalManager().enviarPaquete("4");
             senalEnviada = true;
-            graphics.setContentPane(graphics.getPantallaConexion());
+            graphics.cambiarPantalla(graphics.getPantallaConexion());
         });
         this.add(btn_enviar);
 

@@ -37,6 +37,7 @@ public class PantallaLobby extends PantallaBase {
 
     }
 
+
     public void onJugadoresEnLobby(String j){
         jugadores.setText(j);
     }

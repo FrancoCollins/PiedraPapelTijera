@@ -29,12 +29,12 @@ public class PantallaInicial extends PantallaBase {
             System.out.println("Enviada senal de conectarse");
             graphics.getFunctionality().getSignalManager().enviarSenal(Senal.SOLICITAR_LISTA_TORNEOS);
             System.out.println("Enviada senal de solicitar lista torneos");
-            graphics.setContentPane(graphics.getPantallaUnirseTorneo());
+            graphics.cambiarPantalla(graphics.getPantallaUnirseTorneo());
         });
         joinServer.setSize(144,27);
 
         createServer = new JButton("Crear torneo");
-        createServer.addActionListener(e -> graphics.setContentPane(graphics.getPantallaCreacionTorneo()));
+        createServer.addActionListener(e -> graphics.cambiarPantalla(graphics.getPantallaCreacionTorneo()));
         createServer.setSize(108,27);
         createServer.setLocation(63, 228);
         this.add(createServer);

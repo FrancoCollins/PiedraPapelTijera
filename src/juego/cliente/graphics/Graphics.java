@@ -3,6 +3,7 @@ package juego.cliente.graphics;
 import juego.cliente.GameFunctionality;
 
 import javax.swing.*;
+import java.util.Stack;
 
 public class Graphics extends JFrame {
 
@@ -37,9 +38,8 @@ public class Graphics extends JFrame {
         this.setVisible(true);
     }
 
-
     public void onConectando() {
-        this.setContentPane(pantallaConexion);
+        this.cambiarPantalla(pantallaConexion);
     }
 
     public void onConexionExitosa(){
@@ -52,17 +52,17 @@ public class Graphics extends JFrame {
     }
 
     public void onEnviarSeleccion() {
-        this.setContentPane(pantallaEnfrentamiento);
+        this.cambiarPantalla(pantallaEnfrentamiento);
     }
 
 
     public void onEnviarNombre() {
         System.out.println("GRAPHICS dice: Esperando a que el usuario escriba su nombre.");
-        this.setContentPane(pantallaConexion);
+        this.cambiarPantalla(pantallaConexion);
     }
 
     public void onConexionExitosaTorneo() {
-        this.setContentPane(pantallaLobby);
+        this.cambiarPantalla(pantallaLobby);
     }
 
     public void onJugadoresEnLobby(String jugadores) {
@@ -115,6 +115,24 @@ public class Graphics extends JFrame {
 
     public void setNombreTorneo(String nombreTorneo) {
         pantallaLobby.setNombreTorneo(nombreTorneo);
+    }
+
+    public void cambiarPantalla(PantallaBase pantallaSiguiente){
+        PantallaBase pantallaActual = (PantallaBase) this.getContentPane();
+        if(pantallaActual instanceof PantallaCreacionTorneo){
+            this.pantallaCreacionTorneo = new PantallaCreacionTorneo(this);
+        } else if (pantallaActual instanceof PantallaLobby) {
+            pantallaLobby = new PantallaLobby(this);
+        } else if (pantallaActual instanceof PantallaUnirseTorneo) {
+            pantallaUnirseTorneo = new PantallaUnirseTorneo(this);
+        } else if (pantallaActual instanceof PantallaEnfrentamiento) {
+            pantallaEnfrentamiento = new PantallaEnfrentamiento(this);
+        }
+
+        this.setContentPane(pantallaSiguiente);
+    }
+    public void volver() {
+        this.setContentPane(pantallaInicial);
     }
 }
 

@@ -10,8 +10,6 @@ public class PantallaUnirseTorneo extends PantallaBase {
     private JTable tablaTorneos;
     private JTextField entradaCodigoTorneo;
 
-    private Graphics graphics;
-
     private JLabel titulo;
 
     private JButton unirse_torneo;
