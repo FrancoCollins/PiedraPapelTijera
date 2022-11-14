@@ -58,6 +58,21 @@ public class PantallaUnirseTorneo extends JPanel {
             graphics.getFunctionality().getSignalManager().enviarPaquete(clave);
         });
 
+        // COMIENZO DE UNIRSE A TORNEO CON CODIGO Y BOTON DE REFRESCAR TABLA
+
+
+
+
+
+
+
+
+
+
+
+
+        // FINAL DE UNIRSE A TORNEO CON CODIGO Y BOTON DE REFRESCAR TABLA
+
         revalidate();
         repaint();
     }

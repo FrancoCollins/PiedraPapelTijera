@@ -33,7 +33,7 @@ public class Enfrentamiento extends Thread {
         return false;
     }
 
-    public boolean jugadorNoSeHaDesconectado(int senal1, int senal2){
+    public boolean jugadorNoSeHaDesconectado(int senal1, int senal2) {
         if (senal1 == Senal.DESCONECTADO)
             return false;
         if (senal2 == Senal.DESCONECTADO)
@@ -88,17 +88,28 @@ public class Enfrentamiento extends Thread {
                     torneo.enviarSenalAJugador(p2, Senal.SELECCION_INCORRECTA);
                     senal2 = torneo.recibirAccionJugador(p2);
                 }
-            } while ( (seleccionEsIncorrecta(senal1, senal2) || torneo.esError(senal1, senal2)));
+            } while (jugadorNoSeHaDesconectado(senal1, senal2) && (seleccionEsIncorrecta(senal1, senal2) || torneo.esError(senal1, senal2)));
 
             Jugador ganador = ganadorRonda(senal1, senal2);
 
 
+            // Si algún jugador se ha desconectado, el ganador será el otro.
+            if (!jugadorNoSeHaDesconectado(senal1, senal2)) {
+                if (senal1 == Senal.DESCONECTADO) {
+                    ganadorFinal = p2;
+                    torneo.enviarSenalAJugador(p2, Senal.GANADOR_DE_ENFRENTAMIENTO);
+                } else {
+                    ganadorFinal = p1;
+                    torneo.enviarSenalAJugador(p1, Senal.GANADOR_DE_ENFRENTAMIENTO);
+                }
 
-
+                Thread.currentThread().interrupt();
+                break;
+            }
 
 
             if (ganador == null) {
-                 torneo.enviarSenalAJugadores(p1, p2, Senal.EMPATE);
+                torneo.enviarSenalAJugadores(p1, p2, Senal.EMPATE);
             } else {
                 if (ganador == p1) {
                     torneo.enviarSenalAJugador(p1, Senal.GANADOR_DE_RONDA);
@@ -119,7 +130,6 @@ public class Enfrentamiento extends Thread {
                 throw new RuntimeException(e);
             }
         }
-
 
 
         if (puntajeP1 == 3) {
@@ -178,10 +188,12 @@ public class Enfrentamiento extends Thread {
         this.puntajeP2 = puntajeP2;
     }
 
-    public void setGanadorFinal(Jugador ganador){
+    public void setGanadorFinal(Jugador ganador) {
         this.ganadorFinal = ganador;
     }
 
-    public Jugador getGanadorFinal(){ return ganadorFinal;}
+    public Jugador getGanadorFinal() {
+        return ganadorFinal;
+    }
 }
 
