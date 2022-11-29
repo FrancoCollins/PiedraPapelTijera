@@ -23,4 +23,5 @@ public class Jugador{
         this.writter = new PrintStream(socket.getOutputStream());
     }
 
+
 }

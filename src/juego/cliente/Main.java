@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class Main {
 	public static final int PUERTO = 1043;
-	public static final String IP_SERVER = "localhost";
+	public static final String IP_SERVER = "10.34.83.45";
 
 	public static String nombre;
 

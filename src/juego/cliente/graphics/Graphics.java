@@ -6,7 +6,7 @@ import javax.swing.*;
 
 public class Graphics extends JFrame {
 
-    private Pantalla_ganador pantallaGanadorTorneo;
+    private PantallaGanador pantallaGanadorTorneo;
 
     private PantallaInicial pantallaInicial;
 
@@ -27,7 +27,7 @@ public class Graphics extends JFrame {
     public Graphics(GameFunctionality functionality){
         this.functionality = functionality;
         this.pantallaPerdedorTorneo = new PantallaPerdedorTorneo(this);
-        this.pantallaGanadorTorneo = new Pantalla_ganador(this);
+        this.pantallaGanadorTorneo = new PantallaGanador(this);
         this.pantallaEnfrentamiento = new PantallaEnfrentamiento(this);
         this.pantallaInicial = new PantallaInicial(this);
         this.pantallaConexion = new PantallaConexion(this);
@@ -135,11 +135,11 @@ public class Graphics extends JFrame {
         this.setContentPane(pantallaSiguiente);
     }
 
-    public Pantalla_ganador getPantallaGanadorTorneo() {
+    public PantallaGanador getPantallaGanadorTorneo() {
         return pantallaGanadorTorneo;
     }
 
-    public void setPantallaGanadorTorneo(Pantalla_ganador pantallaGanadorTorneo) {
+    public void setPantallaGanadorTorneo(PantallaGanador pantallaGanadorTorneo) {
         this.pantallaGanadorTorneo = pantallaGanadorTorneo;
     }
 
